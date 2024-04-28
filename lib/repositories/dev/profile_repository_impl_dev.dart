@@ -1,31 +1,19 @@
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/profile_repository_interface.dart';
 
-class ProfileRepository {
+class ProfileRepositoryImplDev implements IProfileRepository {
   ///
   /// API 103
+  @override
   Future<ResModel<List<ProductPreviewModel>>> getProfileProductList({
     required int userId,
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get(
-    //   '/profile/product/$userId',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ProductPreviewModel>>(
@@ -59,19 +47,10 @@ class ProfileRepository {
 
   ///
   /// API 104
+  @override
   Future<ResModel<List<ProductPreviewModel>>> getProfileProductHeartList({
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get(
-    //   '/profile/product/heart',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ProductPreviewModel>>(
@@ -105,19 +84,10 @@ class ProfileRepository {
 
   ///
   /// API 105
+  @override
   Future<ResModel<List<PurchaseModel>>> getProfileProductPurchaseList({
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get(
-    //   '/profile/product/purchase',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<PurchaseModel>>(
@@ -153,20 +123,11 @@ class ProfileRepository {
 
   ///
   /// API 202
+  @override
   Future<ResModel<List<TogetherPreviewModel>>> getProfileTogetherList({
     required int userId,
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get(
-    //   '/profile/together/$userId',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<TogetherPreviewModel>>(
@@ -203,19 +164,10 @@ class ProfileRepository {
 
   ///
   /// API 203
+  @override
   Future<ResModel<List<TogetherPreviewModel>>> getProfileTogetherHeartList({
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get(
-    //   '/profile/together/heart',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<TogetherPreviewModel>>(
@@ -252,19 +204,10 @@ class ProfileRepository {
 
   ///
   /// API 204
+  @override
   Future<ResModel<List<PurchaseModel>>> getProfileTogetherPurchaseList({
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get(
-    //   '/profile/together/purchase',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<PurchaseModel>>(

@@ -3,11 +3,11 @@ import 'package:child_goods_store_flutter/blocs/together/detail/together_detail_
 import 'package:child_goods_store_flutter/blocs/together/detail/together_detail_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
-import 'package:child_goods_store_flutter/repositories/together_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
 
 class TogetherDetailBloc extends Bloc<TogetherDetailEvent, TogetherDetailState>
     with DioExceptionHandlerMixin {
-  final TogetherRepository togetherRepository;
+  final ITogetherRepository togetherRepository;
   final int togetherId;
 
   TogetherDetailBloc({

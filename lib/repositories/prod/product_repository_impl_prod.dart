@@ -12,12 +12,14 @@ import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
-class ProductRepository {
+class ProductRepositoryImplProd implements IProductRepository {
   ///
   /// API 101
+  @override
   Future<ResModel<List<ProductPreviewModel>>> getProductList({
     required ESearchRange region,
     EMainCategory? mainCategory,
@@ -87,6 +89,7 @@ class ProductRepository {
 
   ///
   /// API 106
+  @override
   Future<ResModel<ProductModel>> getProduct({
     required int productId,
   }) async {
@@ -136,6 +139,7 @@ class ProductRepository {
 
   ///
   /// API 107
+  @override
   Future<ResModel<void>> postProductHeart({
     required int productId,
   }) async {
@@ -155,6 +159,7 @@ class ProductRepository {
 
   ///
   /// API 108
+  @override
   Future<ResModel<void>> deleteProductHeart({
     required int productId,
   }) async {
@@ -174,6 +179,7 @@ class ProductRepository {
 
   ///
   /// API 109
+  @override
   Future<ResModel<int>> postProduct({
     required ProductModel product,
   }) async {
@@ -204,6 +210,7 @@ class ProductRepository {
 
   ///
   /// API 110
+  @override
   Future<ResModel<int>> patchProduct({
     required ProductModel product,
   }) async {
@@ -234,6 +241,7 @@ class ProductRepository {
 
   ///
   /// API 111
+  @override
   Future<ResModel<void>> postProductState({
     required int productId,
     required EProductSaleState state,
@@ -261,6 +269,7 @@ class ProductRepository {
 
   ///
   /// API 112
+  @override
   Future<ResModel<List<UserProfileModel>>> getProductBuyer({
     required int productId,
   }) async {

@@ -5,7 +5,7 @@ import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
-import 'package:child_goods_store_flutter/repositories/search_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/search_repository_interface.dart';
 
 class _OnSearch extends EditTagEvent {
   final String fireQuery;
@@ -15,7 +15,7 @@ class _OnSearch extends EditTagEvent {
 
 class EditTagBloc extends Bloc<EditTagEvent, EditTagState>
     with DioExceptionHandlerMixin {
-  final SearchRepository searchRepository;
+  final ISearchRepository searchRepository;
 
   EditTagBloc({
     required this.searchRepository,

@@ -4,13 +4,13 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/repositories/product_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     with DioExceptionHandlerMixin {
-  final ProductRepository productRepository;
+  final IProductRepository productRepository;
   final int productId;
 
   ProductDetailBloc({

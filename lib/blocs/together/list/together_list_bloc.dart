@@ -4,12 +4,12 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
-import 'package:child_goods_store_flutter/repositories/together_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TogetherListBloc extends Bloc<TogetherListEvent, TogetherListState>
     with DioExceptionHandlerMixin {
-  final TogetherRepository togetherRepository;
+  final ITogetherRepository togetherRepository;
 
   TogetherListBloc({
     required this.togetherRepository,

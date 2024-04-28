@@ -4,12 +4,12 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
-import 'package:child_goods_store_flutter/repositories/child_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/child_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChildBloc extends Bloc<ChildEvent, ChildState>
     with DioExceptionHandlerMixin {
-  final ChildRepository childRepository;
+  final IChildRepository childRepository;
 
   ChildBloc({
     required this.childRepository,

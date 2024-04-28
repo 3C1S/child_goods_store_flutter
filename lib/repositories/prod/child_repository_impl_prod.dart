@@ -5,12 +5,14 @@ import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
+import 'package:child_goods_store_flutter/repositories/interface/child_repository_interface.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
-class ChildRepository {
+class ChildRepositoryImplProd implements IChildRepository {
   ///
   /// API 11
+  @override
   Future<ResModel<List<ChildModel>>> getChild() async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
@@ -57,6 +59,7 @@ class ChildRepository {
 
   ///
   /// API 12
+  @override
   Future<ResModel<ChildModel>> postChild({
     required ChildModel child,
   }) async {
@@ -94,6 +97,7 @@ class ChildRepository {
 
   ///
   /// API 13
+  @override
   Future<ResModel<ChildModel>> patchChild({
     required ChildModel child,
   }) async {
@@ -130,6 +134,7 @@ class ChildRepository {
   }
 
   /// API 102
+  @override
   Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
     required int childId,
     required int page,

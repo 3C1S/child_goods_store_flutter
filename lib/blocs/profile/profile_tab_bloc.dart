@@ -6,14 +6,14 @@ import 'package:child_goods_store_flutter/models/product/product_preview_model.d
 import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
 import 'package:child_goods_store_flutter/models/review/review_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
-import 'package:child_goods_store_flutter/repositories/profile_repository.dart';
-import 'package:child_goods_store_flutter/repositories/review_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/profile_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/review_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     with DioExceptionHandlerMixin {
-  final ProfileRepository profileRepository;
-  final ReviewRepository reviewRepository;
+  final IProfileRepository profileRepository;
+  final IReviewRepository reviewRepository;
   final int userId;
 
   ProfileTabBloc({

@@ -5,12 +5,12 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
-import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     with DioExceptionHandlerMixin {
-  final UserRepository userRepository;
+  final IUserRepository userRepository;
   final int userId;
 
   ProfileBloc({

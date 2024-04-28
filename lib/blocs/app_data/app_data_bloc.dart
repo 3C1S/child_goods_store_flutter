@@ -3,12 +3,12 @@ import 'package:child_goods_store_flutter/blocs/app_data/app_data_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/address/address_model.dart';
-import 'package:child_goods_store_flutter/repositories/data_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/data_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppDataBloc extends Bloc<AppDataEvent, AppDataState>
     with DioExceptionHandlerMixin {
-  final DataRepository dataRepository;
+  final IDataRepository dataRepository;
 
   AppDataBloc({
     required this.dataRepository,

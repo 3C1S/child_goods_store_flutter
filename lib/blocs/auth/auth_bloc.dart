@@ -7,16 +7,16 @@ import 'package:child_goods_store_flutter/enums/auth_method.dart';
 import 'package:child_goods_store_flutter/enums/auth_status.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
-import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
-import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
+import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
 import 'package:child_goods_store_flutter/GA/google_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState>
     with ChangeNotifier, DioExceptionHandlerMixin {
-  final AuthRepository authRepository;
-  final UserRepository userRepository;
+  final IAuthRepository authRepository;
+  final IUserRepository userRepository;
 
   AuthBloc({
     required this.authRepository,

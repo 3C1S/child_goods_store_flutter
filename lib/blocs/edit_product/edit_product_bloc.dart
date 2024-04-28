@@ -7,15 +7,15 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/repositories/image_repository.dart';
-import 'package:child_goods_store_flutter/repositories/product_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/image_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
     with DioExceptionHandlerMixin {
-  final ProductRepository productRepository;
-  final ImageRepository imageRepository;
+  final IProductRepository productRepository;
+  final IImageRepository imageRepository;
   final EHttpMethod httpMethod;
 
   EditProductBloc({
