@@ -15,7 +15,7 @@ class FollowState extends BlocState {
 
   FollowState.init()
       : userList = [],
-        page = 1,
+        page = 0,
         super(
           status: ELoadingStatus.init,
           message: null,

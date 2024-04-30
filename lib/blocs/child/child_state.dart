@@ -28,7 +28,7 @@ class ChildState extends BlocState {
         selectedChild = null,
         productListStatus = ELoadingStatus.init,
         productList = const [],
-        page = 1,
+        page = 0,
         super(
           status: ELoadingStatus.init,
           message: null,
