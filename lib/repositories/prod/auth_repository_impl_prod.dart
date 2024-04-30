@@ -1,9 +1,7 @@
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
@@ -128,30 +126,22 @@ class AuthRepositoryImplProd implements IAuthRepository {
     required String email,
     required String password,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // var res = await dio.post(
-    //   '/login',
-    //   data: {
-    //     'email': email,
-    //     'password': password,
-    //   },
-    // );
+    Dio dio = Dio();
+    dio.interceptors.add(UnAuthInterceptor());
+    var res = await dio.post(
+      '/login',
+      data: {
+        'email': email,
+        'password': password,
+      },
+    );
 
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<String>(
-      code: 1000,
-      data: 'test_jwt_token',
-    ).toJson((token) => token.toString());
-
-    var res = ResModel<String>.fromJson(
-      resTmp,
+    var resModel = ResModel<String>.fromJson(
+      res.data,
       (json) => json.toString(),
     );
 
-    return res;
+    return resModel;
   }
 
   ///
@@ -162,25 +152,23 @@ class AuthRepositoryImplProd implements IAuthRepository {
     required String password,
     // required String phoneNum,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.post(
-    //   '/signup',
-    //   data: {
-    //     'email': email,
-    //     'password': password,
-    //     'phoneNum': phoneNum,
-    //   }
-    // );
+    Dio dio = Dio();
+    dio.interceptors.add(UnAuthInterceptor());
+    var res = await dio.post(
+      '/signup',
+      data: {
+        'email': email,
+        'password': password,
+        // 'phoneNum': phoneNum,
+      },
+    );
 
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
+    var resModel = ResModel<void>.fromJson(
+      res.data,
+      (json) {},
+    );
 
-    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
-
-    var res = ResModel<void>.fromJson(resTmp, (json) {});
-
-    return res;
+    return resModel;
   }
 
   ///
@@ -189,23 +177,21 @@ class AuthRepositoryImplProd implements IAuthRepository {
   Future<ResModel<void>> postEmailSend({
     required String email,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.post(
-    //   '/email/send',
-    //   data: {
-    //     'email': email,
-    //   },
-    // );
+    Dio dio = Dio();
+    dio.interceptors.add(UnAuthInterceptor());
+    var res = await dio.post(
+      '/mail/send',
+      data: {
+        'email': email,
+      },
+    );
 
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
+    var resModel = ResModel<void>.fromJson(
+      res.data,
+      (json) {},
+    );
 
-    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
-
-    var res = ResModel<void>.fromJson(resTmp, (json) {});
-
-    return res;
+    return resModel;
   }
 
   ///
@@ -215,23 +201,21 @@ class AuthRepositoryImplProd implements IAuthRepository {
     required String email,
     required String code,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.post(
-    //   '/email/verify',
-    //   data: {
-    //     'email': email,
-    //     'authNum': code,
-    //   },
-    // );
+    Dio dio = Dio();
+    dio.interceptors.add(UnAuthInterceptor());
+    var res = await dio.post(
+      '/mail/verify',
+      data: {
+        'email': email,
+        'authNum': code,
+      },
+    );
 
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
+    var resModel = ResModel<void>.fromJson(
+      res.data,
+      (json) {},
+    );
 
-    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
-
-    var res = ResModel<void>.fromJson(resTmp, (json) {});
-
-    return res;
+    return resModel;
   }
 }

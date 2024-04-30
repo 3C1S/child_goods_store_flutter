@@ -1,11 +1,9 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class UserRepositoryImplProd implements IUserRepository {
@@ -13,35 +11,16 @@ class UserRepositoryImplProd implements IUserRepository {
   /// API 6
   @override
   Future<ResModel<UserModel>> getUser() async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/user');
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.get('/user');
 
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<UserModel>(
-      code: 1000,
-      data: UserModel(
-        userId: 1,
-        nickName: 'Woong test',
-        introduce: 'Hello world',
-        // phoneNum: '01012345678',
-        profileImg: '',
-        region: '경기도',
-        town: '안양시',
-        createAt: DateTime.now(),
-      ),
-    ).toJson(
-      (user) => user.toJson(),
-    );
-
-    var res = ResModel<UserModel>.fromJson(
-      resTmp,
+    var resModel = ResModel<UserModel>.fromJson(
+      res.data,
       (json) => UserModel.fromJson(json),
     );
 
-    return res;
+    return resModel;
   }
 
   ///
@@ -50,29 +29,19 @@ class UserRepositoryImplProd implements IUserRepository {
   Future<ResModel<UserModel>> postUser({
     required UserModel user,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/user',
-    //   data: user.toJson(),
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<UserModel>(
-      code: 1000,
-      data: user,
-    ).toJson(
-      (user) => user.toJson(),
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.post(
+      '/user',
+      data: user.toJson(),
     );
 
-    var res = ResModel<UserModel>.fromJson(
-      resTmp,
+    var resModel = ResModel<UserModel>.fromJson(
+      res.data,
       (json) => UserModel.fromJson(json),
     );
 
-    return res;
+    return resModel;
   }
 
   ///
@@ -81,29 +50,19 @@ class UserRepositoryImplProd implements IUserRepository {
   Future<ResModel<UserModel>> patchUser({
     required UserModel user,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.patch(
-    //   '/user',
-    //   data: user.toJson(),
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<UserModel>(
-      code: 1000,
-      data: user,
-    ).toJson(
-      (user) => user.toJson(),
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.patch(
+      '/user',
+      data: user.toJson(),
     );
 
-    var res = ResModel<UserModel>.fromJson(
-      resTmp,
+    var resModel = ResModel<UserModel>.fromJson(
+      res.data,
       (json) => UserModel.fromJson(json),
     );
 
-    return res;
+    return resModel;
   }
 
   ///
@@ -289,18 +248,16 @@ class UserRepositoryImplProd implements IUserRepository {
   Future<ResModel<void>> postUserFollow({
     required int followId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post('/user/follow/$followId');
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.post('/user/follow/$followId');
 
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
+    var resModel = ResModel.fromJson(
+      res.data,
+      (json) => null,
+    );
 
-    var resTmp = ResModel(code: 1000).toJson((p0) => null);
-
-    var res = ResModel.fromJson(resTmp, (json) => null);
-
-    return res;
+    return resModel;
   }
 
   ///
@@ -309,17 +266,15 @@ class UserRepositoryImplProd implements IUserRepository {
   Future<ResModel<void>> deleteUserFollow({
     required int followId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.delete('/user/follow/$followId');
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.delete('/user/follow/$followId');
 
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
+    var resModel = ResModel.fromJson(
+      res.data,
+      (json) => null,
+    );
 
-    var resTmp = ResModel(code: 1000).toJson((p0) => null);
-
-    var res = ResModel.fromJson(resTmp, (json) => null);
-
-    return res;
+    return resModel;
   }
 }

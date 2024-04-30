@@ -1,5 +1,4 @@
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
-import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
@@ -7,7 +6,6 @@ import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/profile_repository_interface.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class ProfileRepositoryImplProd implements IProfileRepository {
@@ -18,45 +16,23 @@ class ProfileRepositoryImplProd implements IProfileRepository {
     required int userId,
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get(
-    //   '/profile/product/$userId',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<List<ProductPreviewModel>>(
-      code: 1000,
-      data: [
-        for (var productId in List.generate(10, (index) => index + 1))
-          ProductPreviewModel(
-            productId: productId,
-            productName: '$productId th product',
-            price: 12000,
-            state: EProductSaleState.sale,
-            productImage: productId % 3 == 0
-                ? ''
-                : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
-            productHeart: productId % 3 == 0 ? false : true,
-          ),
-      ],
-    ).toJson(
-      (products) => products.map((prod) => prod.toJson()).toList(),
+    Dio dio = Dio();
+    dio.interceptors.add(UnAuthInterceptor());
+    var res = await dio.get(
+      '/profile/product/$userId',
+      queryParameters: {
+        'page': page,
+      },
     );
 
-    var res = ResModel<List<ProductPreviewModel>>.fromJson(
-      resTmp,
+    var resModel = ResModel<List<ProductPreviewModel>>.fromJson(
+      res.data,
       (json) => (json as List<dynamic>)
           .map((prod) => ProductPreviewModel.fromJson(prod))
           .toList(),
     );
 
-    return res;
+    return resModel;
   }
 
   ///
@@ -65,45 +41,23 @@ class ProfileRepositoryImplProd implements IProfileRepository {
   Future<ResModel<List<ProductPreviewModel>>> getProfileProductHeartList({
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get(
-    //   '/profile/product/heart',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<List<ProductPreviewModel>>(
-      code: 1000,
-      data: [
-        for (var productId in List.generate(10, (index) => index + 1))
-          ProductPreviewModel(
-            productId: productId,
-            productName: '$productId th product',
-            price: 12000,
-            state: EProductSaleState.sale,
-            productImage: productId % 3 == 0
-                ? ''
-                : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
-            productHeart: true,
-          ),
-      ],
-    ).toJson(
-      (products) => products.map((prod) => prod.toJson()).toList(),
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.get(
+      '/profile/product/heart',
+      queryParameters: {
+        'page': page,
+      },
     );
 
-    var res = ResModel<List<ProductPreviewModel>>.fromJson(
-      resTmp,
+    var resModel = ResModel<List<ProductPreviewModel>>.fromJson(
+      res.data,
       (json) => (json as List<dynamic>)
           .map((prod) => ProductPreviewModel.fromJson(prod))
           .toList(),
     );
 
-    return res;
+    return resModel;
   }
 
   ///
@@ -112,47 +66,23 @@ class ProfileRepositoryImplProd implements IProfileRepository {
   Future<ResModel<List<PurchaseModel>>> getProfileProductPurchaseList({
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get(
-    //   '/profile/product/purchase',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<List<PurchaseModel>>(
-      code: 1000,
-      data: [
-        for (var productId in List.generate(10, (index) => index + 1))
-          PurchaseModel(
-            category: EChatItemType.product,
-            id: productId,
-            name: '$productId name',
-            sellerName: '$productId saller name',
-            price: 10000,
-            saleCompleteDate: DateTime.now(),
-            image: productId % 4 == 0
-                ? ''
-                : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
-            isReview: productId % 3 == 0 ? false : true,
-          ),
-      ],
-    ).toJson(
-      (products) => products.map((prod) => prod.toJson()).toList(),
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.get(
+      '/profile/product/purchase',
+      queryParameters: {
+        'page': page,
+      },
     );
 
-    var res = ResModel<List<PurchaseModel>>.fromJson(
-      resTmp,
+    var resModel = ResModel<List<PurchaseModel>>.fromJson(
+      res.data,
       (json) => (json as List<dynamic>)
           .map((prod) => PurchaseModel.fromJson(prod))
           .toList(),
     );
 
-    return res;
+    return resModel;
   }
 
   ///

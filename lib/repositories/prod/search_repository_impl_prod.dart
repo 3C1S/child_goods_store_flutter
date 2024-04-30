@@ -1,7 +1,5 @@
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/search_repository_interface.dart';
-import 'package:dio/dio.dart';
 
 class SearchRepositoryImplProd implements ISearchRepository {
   ///

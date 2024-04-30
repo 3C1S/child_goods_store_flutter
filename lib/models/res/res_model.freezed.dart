@@ -21,6 +21,7 @@ ResModel<T> _$ResModelFromJson<T>(
 
 /// @nodoc
 mixin _$ResModel<T> {
+  @JsonKey(fromJson: castToInt)
   int get code => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   T? get data => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $ResModelCopyWith<T, $Res> {
           ResModel<T> value, $Res Function(ResModel<T>) then) =
       _$ResModelCopyWithImpl<T, $Res, ResModel<T>>;
   @useResult
-  $Res call({int code, String? message, T? data});
+  $Res call({@JsonKey(fromJson: castToInt) int code, String? message, T? data});
 }
 
 /// @nodoc
@@ -83,7 +84,7 @@ abstract class _$$ResModelImplCopyWith<T, $Res>
       __$$ResModelImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({int code, String? message, T? data});
+  $Res call({@JsonKey(fromJson: castToInt) int code, String? message, T? data});
 }
 
 /// @nodoc
@@ -121,13 +122,17 @@ class __$$ResModelImplCopyWithImpl<T, $Res>
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
 class _$ResModelImpl<T> implements _ResModel<T> {
-  _$ResModelImpl({required this.code, this.message, this.data});
+  _$ResModelImpl(
+      {@JsonKey(fromJson: castToInt) required this.code,
+      this.message,
+      this.data});
 
   factory _$ResModelImpl.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
       _$$ResModelImplFromJson(json, fromJsonT);
 
   @override
+  @JsonKey(fromJson: castToInt)
   final int code;
   @override
   final String? message;
@@ -168,7 +173,7 @@ class _$ResModelImpl<T> implements _ResModel<T> {
 
 abstract class _ResModel<T> implements ResModel<T> {
   factory _ResModel(
-      {required final int code,
+      {@JsonKey(fromJson: castToInt) required final int code,
       final String? message,
       final T? data}) = _$ResModelImpl<T>;
 
@@ -177,6 +182,7 @@ abstract class _ResModel<T> implements ResModel<T> {
       _$ResModelImpl<T>.fromJson;
 
   @override
+  @JsonKey(fromJson: castToInt)
   int get code;
   @override
   String? get message;
