@@ -21,7 +21,7 @@ class UserRepositoryImplDev implements IUserRepository {
         profileImg: '',
         region: '경기도',
         town: '안양시',
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
       ),
     ).toJson(
       (user) => user.toJson(),
@@ -97,7 +97,7 @@ class UserRepositoryImplDev implements IUserRepository {
         followNum: 10,
         followingNum: 20,
         averageStars: 4.5,
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
       ),
     ).toJson(
       (userProfile) => userProfile.toJson(),
@@ -130,7 +130,7 @@ class UserRepositoryImplDev implements IUserRepository {
         followNum: 10,
         followingNum: 20,
         averageStars: 4.5,
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
       ),
     ).toJson(
       (userProfile) => userProfile.toJson(),

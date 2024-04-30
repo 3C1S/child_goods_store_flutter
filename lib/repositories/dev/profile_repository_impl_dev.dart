@@ -97,7 +97,7 @@ class ProfileRepositoryImplDev implements IProfileRepository {
           PurchaseModel(
             category: EChatItemType.product,
             id: productId,
-            name: '$productId name',
+            title: '$productId name',
             sellerName: '$productId saller name',
             price: 10000,
             saleCompleteDate: DateTime.now(),
@@ -217,7 +217,7 @@ class ProfileRepositoryImplDev implements IProfileRepository {
           PurchaseModel(
             category: EChatItemType.together,
             id: togetherId,
-            name: '$togetherId name',
+            title: '$togetherId name',
             sellerName: '$togetherId saller name',
             price: 10000,
             saleCompleteDate: DateTime.now(),

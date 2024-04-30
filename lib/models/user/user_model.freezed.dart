@@ -27,7 +27,7 @@ mixin _$UserModel {
       throw _privateConstructorUsedError; // String? phoneNum, // deprecated
   String? get region => throw _privateConstructorUsedError;
   String? get town => throw _privateConstructorUsedError;
-  DateTime? get createAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +47,7 @@ abstract class $UserModelCopyWith<$Res> {
       String? profileImg,
       String? region,
       String? town,
-      DateTime? createAt});
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -69,7 +69,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? profileImg = freezed,
     Object? region = freezed,
     Object? town = freezed,
-    Object? createAt = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -96,9 +96,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.town
           : town // ignore: cast_nullable_to_non_nullable
               as String?,
-      createAt: freezed == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
   }
@@ -119,7 +119,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? profileImg,
       String? region,
       String? town,
-      DateTime? createAt});
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -139,7 +139,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? profileImg = freezed,
     Object? region = freezed,
     Object? town = freezed,
-    Object? createAt = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_$UserModelImpl(
       userId: freezed == userId
@@ -166,9 +166,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.town
           : town // ignore: cast_nullable_to_non_nullable
               as String?,
-      createAt: freezed == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -184,7 +184,7 @@ class _$UserModelImpl implements _UserModel {
       this.profileImg,
       this.region,
       this.town,
-      this.createAt});
+      this.createdAt});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -203,11 +203,11 @@ class _$UserModelImpl implements _UserModel {
   @override
   final String? town;
   @override
-  final DateTime? createAt;
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, region: $region, town: $town, createAt: $createAt)';
+    return 'UserModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, region: $region, town: $town, createdAt: $createdAt)';
   }
 
   @override
@@ -224,14 +224,14 @@ class _$UserModelImpl implements _UserModel {
                 other.profileImg == profileImg) &&
             (identical(other.region, region) || other.region == region) &&
             (identical(other.town, town) || other.town == town) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, nickName, introduce,
-      profileImg, region, town, createAt);
+      profileImg, region, town, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +255,7 @@ abstract class _UserModel implements UserModel {
       final String? profileImg,
       final String? region,
       final String? town,
-      final DateTime? createAt}) = _$UserModelImpl;
+      final DateTime? createdAt}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -273,7 +273,7 @@ abstract class _UserModel implements UserModel {
   @override
   String? get town;
   @override
-  DateTime? get createAt;
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

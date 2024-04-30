@@ -48,6 +48,25 @@ class AppNetworkImage extends StatelessWidget {
               fit: BoxFit.cover,
               width: width,
               height: height,
+              errorBuilder: (context, error, stackTrace) => Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.image_not_supported_rounded,
+                      size: Sizes.size40,
+                      color: Colors.black87.withOpacity(0.5),
+                    ),
+                    Gaps.v10,
+                    AppFont(
+                      '제공되는 이미지가\n없습니다 :(',
+                      textAlign: TextAlign.center,
+                      fontSize: Sizes.size10,
+                      color: Colors.black87.withOpacity(0.5),
+                    ),
+                  ],
+                ),
+              ),
             ),
     );
   }

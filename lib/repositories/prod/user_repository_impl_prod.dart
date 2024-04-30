@@ -86,7 +86,7 @@ class UserRepositoryImplProd implements IUserRepository {
         followNum: 10,
         followingNum: 20,
         averageStars: 4.5,
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
       ),
     ).toJson(
       (userProfile) => userProfile.toJson(),
@@ -107,7 +107,7 @@ class UserRepositoryImplProd implements IUserRepository {
     required int userId,
   }) async {
     // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.interceptors.add(AuthInterceptor());
     // dio.get('/user/profile/$userId');
 
     // TODO: connect api
@@ -124,7 +124,7 @@ class UserRepositoryImplProd implements IUserRepository {
         followNum: 10,
         followingNum: 20,
         averageStars: 4.5,
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
       ),
     ).toJson(
       (userProfile) => userProfile.toJson(),

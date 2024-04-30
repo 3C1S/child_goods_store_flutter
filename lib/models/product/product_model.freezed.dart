@@ -36,8 +36,8 @@ mixin _$ProductModel {
   EProductSaleState? get state => throw _privateConstructorUsedError;
   @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
   EChildAge? get age => throw _privateConstructorUsedError;
-  DateTime? get createAt => throw _privateConstructorUsedError;
-  DateTime? get updateAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   List<String> get tag => throw _privateConstructorUsedError;
   List<String> get productImage => throw _privateConstructorUsedError;
   bool? get productHeart => throw _privateConstructorUsedError;
@@ -72,8 +72,8 @@ abstract class $ProductModelCopyWith<$Res> {
       EProductSaleState? state,
       @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
       EChildAge? age,
-      DateTime? createAt,
-      DateTime? updateAt,
+      DateTime? createdAt,
+      DateTime? updatedAt,
       List<String> tag,
       List<String> productImage,
       bool? productHeart});
@@ -104,8 +104,8 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? productState = freezed,
     Object? state = freezed,
     Object? age = freezed,
-    Object? createAt = freezed,
-    Object? updateAt = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? tag = null,
     Object? productImage = null,
     Object? productHeart = freezed,
@@ -151,13 +151,13 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as EChildAge?,
-      createAt: freezed == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       tag: null == tag
           ? _value.tag
@@ -213,8 +213,8 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       EProductSaleState? state,
       @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
       EChildAge? age,
-      DateTime? createAt,
-      DateTime? updateAt,
+      DateTime? createdAt,
+      DateTime? updatedAt,
       List<String> tag,
       List<String> productImage,
       bool? productHeart});
@@ -244,8 +244,8 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? productState = freezed,
     Object? state = freezed,
     Object? age = freezed,
-    Object? createAt = freezed,
-    Object? updateAt = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? tag = null,
     Object? productImage = null,
     Object? productHeart = freezed,
@@ -291,13 +291,13 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as EChildAge?,
-      createAt: freezed == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       tag: null == tag
           ? _value._tag
@@ -335,8 +335,8 @@ class _$ProductModelImpl implements _ProductModel {
           toJson: EProductSaleState.toJson)
       this.state,
       @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson) this.age,
-      this.createAt,
-      this.updateAt,
+      this.createdAt,
+      this.updatedAt,
       final List<String> tag = const [],
       final List<String> productImage = const [],
       this.productHeart})
@@ -373,9 +373,9 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
   final EChildAge? age;
   @override
-  final DateTime? createAt;
+  final DateTime? createdAt;
   @override
-  final DateTime? updateAt;
+  final DateTime? updatedAt;
   final List<String> _tag;
   @override
   @JsonKey()
@@ -399,7 +399,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, mainCategory: $mainCategory, subCategory: $subCategory, productState: $productState, state: $state, age: $age, createAt: $createAt, updateAt: $updateAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
+    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, mainCategory: $mainCategory, subCategory: $subCategory, productState: $productState, state: $state, age: $age, createdAt: $createdAt, updatedAt: $updatedAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
   }
 
   @override
@@ -422,10 +422,10 @@ class _$ProductModelImpl implements _ProductModel {
                 other.productState == productState) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.age, age) || other.age == age) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt) &&
-            (identical(other.updateAt, updateAt) ||
-                other.updateAt == updateAt) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
             const DeepCollectionEquality().equals(other._tag, _tag) &&
             const DeepCollectionEquality()
                 .equals(other._productImage, _productImage) &&
@@ -447,8 +447,8 @@ class _$ProductModelImpl implements _ProductModel {
       productState,
       state,
       age,
-      createAt,
-      updateAt,
+      createdAt,
+      updatedAt,
       const DeepCollectionEquality().hash(_tag),
       const DeepCollectionEquality().hash(_productImage),
       productHeart);
@@ -486,8 +486,8 @@ abstract class _ProductModel implements ProductModel {
       final EProductSaleState? state,
       @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
       final EChildAge? age,
-      final DateTime? createAt,
-      final DateTime? updateAt,
+      final DateTime? createdAt,
+      final DateTime? updatedAt,
       final List<String> tag,
       final List<String> productImage,
       final bool? productHeart}) = _$ProductModelImpl;
@@ -522,9 +522,9 @@ abstract class _ProductModel implements ProductModel {
   @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
   EChildAge? get age;
   @override
-  DateTime? get createAt;
+  DateTime? get createdAt;
   @override
-  DateTime? get updateAt;
+  DateTime? get updatedAt;
   @override
   List<String> get tag;
   @override

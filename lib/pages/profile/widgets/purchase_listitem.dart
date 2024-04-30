@@ -119,7 +119,7 @@ class _PurchaseListItemState extends State<PurchaseListItem> {
                           children: [
                             Gaps.v5,
                             AppFont(
-                              widget.purchase.name ?? Strings.nullStr,
+                              widget.purchase.title ?? Strings.nullStr,
                               maxLine: 1,
                             ),
                             Gaps.v5,

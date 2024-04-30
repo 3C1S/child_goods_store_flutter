@@ -211,7 +211,7 @@ class ProfileRepositoryImplProd implements IProfileRepository {
           PurchaseModel(
             category: EChatItemType.together,
             id: togetherId,
-            name: '$togetherId name',
+            title: '$togetherId name',
             sellerName: '$togetherId saller name',
             price: 10000,
             saleCompleteDate: DateTime.now(),

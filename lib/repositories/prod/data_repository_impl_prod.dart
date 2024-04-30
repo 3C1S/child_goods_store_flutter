@@ -73,10 +73,7 @@ class DataRepositoryImplProd implements IDataRepository {
     Dio dio = Dio();
     dio.interceptors.add(AuthInterceptor());
     var res = await dio.patch(
-      '/address',
-      queryParameters: {
-        'addressId': address.addressId,
-      },
+      '/address/${address.addressId}',
       data: address.toJson(),
     );
 

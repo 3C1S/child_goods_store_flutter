@@ -42,8 +42,8 @@ class ProductModel with _$ProductModel {
       toJson: EChildAge.toJson,
     )
     EChildAge? age,
-    DateTime? createAt,
-    DateTime? updateAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
     @Default([]) List<String> tag,
     @Default([]) List<String> productImage,
     bool? productHeart,

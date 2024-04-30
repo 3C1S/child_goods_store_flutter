@@ -23,7 +23,7 @@ mixin _$PurchaseModel {
   @JsonKey(fromJson: EChatItemType.fromJson, toJson: EChatItemType.toJson)
   EChatItemType? get category => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   String? get sellerName => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   DateTime? get saleCompleteDate => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $PurchaseModelCopyWith<$Res> {
       {@JsonKey(fromJson: EChatItemType.fromJson, toJson: EChatItemType.toJson)
       EChatItemType? category,
       int? id,
-      String? name,
+      String? title,
       String? sellerName,
       int? price,
       DateTime? saleCompleteDate,
@@ -69,7 +69,7 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
   $Res call({
     Object? category = freezed,
     Object? id = freezed,
-    Object? name = freezed,
+    Object? title = freezed,
     Object? sellerName = freezed,
     Object? price = freezed,
     Object? saleCompleteDate = freezed,
@@ -85,9 +85,9 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
       sellerName: freezed == sellerName
           ? _value.sellerName
@@ -125,7 +125,7 @@ abstract class _$$PurchaseModelImplCopyWith<$Res>
       {@JsonKey(fromJson: EChatItemType.fromJson, toJson: EChatItemType.toJson)
       EChatItemType? category,
       int? id,
-      String? name,
+      String? title,
       String? sellerName,
       int? price,
       DateTime? saleCompleteDate,
@@ -146,7 +146,7 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? category = freezed,
     Object? id = freezed,
-    Object? name = freezed,
+    Object? title = freezed,
     Object? sellerName = freezed,
     Object? price = freezed,
     Object? saleCompleteDate = freezed,
@@ -162,9 +162,9 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
       sellerName: freezed == sellerName
           ? _value.sellerName
@@ -197,7 +197,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
       {@JsonKey(fromJson: EChatItemType.fromJson, toJson: EChatItemType.toJson)
       this.category,
       this.id,
-      this.name,
+      this.title,
       this.sellerName,
       this.price,
       this.saleCompleteDate,
@@ -213,7 +213,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
   @override
   final int? id;
   @override
-  final String? name;
+  final String? title;
   @override
   final String? sellerName;
   @override
@@ -227,7 +227,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
 
   @override
   String toString() {
-    return 'PurchaseModel(category: $category, id: $id, name: $name, sellerName: $sellerName, price: $price, saleCompleteDate: $saleCompleteDate, image: $image, isReview: $isReview)';
+    return 'PurchaseModel(category: $category, id: $id, title: $title, sellerName: $sellerName, price: $price, saleCompleteDate: $saleCompleteDate, image: $image, isReview: $isReview)';
   }
 
   @override
@@ -238,7 +238,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.sellerName, sellerName) ||
                 other.sellerName == sellerName) &&
             (identical(other.price, price) || other.price == price) &&
@@ -251,7 +251,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, category, id, name, sellerName,
+  int get hashCode => Object.hash(runtimeType, category, id, title, sellerName,
       price, saleCompleteDate, image, isReview);
 
   @JsonKey(ignore: true)
@@ -273,7 +273,7 @@ abstract class _PurchaseModel implements PurchaseModel {
       {@JsonKey(fromJson: EChatItemType.fromJson, toJson: EChatItemType.toJson)
       final EChatItemType? category,
       final int? id,
-      final String? name,
+      final String? title,
       final String? sellerName,
       final int? price,
       final DateTime? saleCompleteDate,
@@ -289,7 +289,7 @@ abstract class _PurchaseModel implements PurchaseModel {
   @override
   int? get id;
   @override
-  String? get name;
+  String? get title;
   @override
   String? get sellerName;
   @override

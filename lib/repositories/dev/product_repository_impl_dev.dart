@@ -98,8 +98,8 @@ class ProductRepositoryImplDev implements IProductRepository {
         productState: EProductState.littleUsage,
         state: EProductSaleState.sale,
         age: EChildAge.age24,
-        createAt: DateTime.now(),
-        updateAt: DateTime.now(),
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
         tag: List.generate(3, (index) => '$productId-$index tag'),
         productImage: [
           'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
