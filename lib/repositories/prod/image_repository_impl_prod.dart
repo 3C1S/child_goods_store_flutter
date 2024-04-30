@@ -62,7 +62,7 @@ class ImageRepositoryImplProd implements IImageRepository {
     ));
     // Convert to Multipart
     List<MultipartFile> mulImages = [];
-    for (int i = 1; i < images.length + 1; i++) {
+    for (int i = 0; i < images.length; i++) {
       mulImages.add(await MultipartFile.fromFile(
         File(images[i].path).path,
         filename: name != null ? '${name}_$i' : images[i].path,
@@ -71,7 +71,7 @@ class ImageRepositoryImplProd implements IImageRepository {
     // Create formdata
     FormData formData = FormData.fromMap({
       'category': category.key,
-      'images': mulImages,
+      'imageList': mulImages,
     });
     // Post
     var res = await dio.post(
@@ -81,7 +81,8 @@ class ImageRepositoryImplProd implements IImageRepository {
 
     var resModel = ResModel<List<String>>.fromJson(
       res.data,
-      (json) => (jsonDecode(json) as List<dynamic>).cast<String>(),
+      (json) =>
+          (json as List<dynamic>).map((image) => image as String).toList(),
     );
 
     return resModel;
