@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/list/product_list_event.dart';
 import 'package:child_goods_store_flutter/blocs/product/list/product_list_state.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
@@ -52,6 +53,15 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
           page: state.page,
         );
 
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
+
         List<ProductPreviewModel> newList = [];
         newList
           ..addAll(state.products)
@@ -81,6 +91,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
         resetMain: true,
         resetSub: true,
         products: const [],
+        page: 0,
       ));
     } else {
       late ESubCategory subCat;
@@ -110,7 +121,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
 
     emit(state.copyWith(
       subCategory: event.subCategory,
-      products: [],
+      products: const [],
+      page: 0,
     ));
 
     add(ProductListGet());
@@ -125,7 +137,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
 
     emit(state.copyWith(
       region: event.region,
-      products: [],
+      products: const [],
+      page: 0,
     ));
 
     add(ProductListGet());
@@ -165,6 +178,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
     emit(state.copyWith(
       applyFilter: true,
       products: const [],
+      page: 0,
     ));
 
     add(ProductListGet());

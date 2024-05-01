@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/blocs/child/child_event.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_state.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
@@ -127,6 +128,15 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
           childId: state.selectedChild!.childId!,
           page: state.page,
         );
+
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
 
         List<ProductPreviewModel> newList = [];
         newList

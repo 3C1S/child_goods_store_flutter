@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/blocs/profile/profile_tab_event.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_tab_state.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
@@ -59,6 +60,15 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           page: state.myProductsPage,
         );
 
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
+
         List<ProductPreviewModel> newList = [];
         newList
           ..addAll(state.myProducts)
@@ -103,6 +113,15 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           page: state.myTogethersPage,
         );
 
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
+
         List<TogetherPreviewModel> newList = [];
         newList
           ..addAll(state.myTogethers)
@@ -145,6 +164,15 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
         var res = await profileRepository.getProfileProductHeartList(
           page: state.heartProductsPage,
         );
+
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
 
         List<ProductPreviewModel> newList = [];
         newList
@@ -189,6 +217,15 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           page: state.heartTogethersPage,
         );
 
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
+
         List<TogetherPreviewModel> newList = [];
         newList
           ..addAll(state.heartTogethers)
@@ -231,6 +268,15 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
         var res = await profileRepository.getProfileProductPurchaseList(
           page: state.purchaseProductsPage,
         );
+
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
 
         List<PurchaseModel> newList = [];
         newList
@@ -275,6 +321,15 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           page: state.purchaseTogethersPage,
         );
 
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
+
         List<PurchaseModel> newList = [];
         newList
           ..addAll(state.purchaseTogethers)
@@ -318,6 +373,15 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           userId: userId,
           page: state.receivedReviewsPage,
         );
+
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
 
         List<ReviewModel> newList = [];
         newList
