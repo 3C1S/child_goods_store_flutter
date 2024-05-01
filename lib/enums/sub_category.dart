@@ -290,7 +290,7 @@ extension SSubCategoryExtension on String {
 
       case '남아 신발':
         return ESubCategory.manShoes;
-      case '여야 신발':
+      case '여아 신발':
         return ESubCategory.womanShoes;
       case '가방':
         return ESubCategory.bag;
