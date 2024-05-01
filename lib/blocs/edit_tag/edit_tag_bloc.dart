@@ -63,17 +63,17 @@ class EditTagBloc extends Bloc<EditTagEvent, EditTagState>
 
         var res = await searchRepository.seatchTag(query: event.fireQuery);
 
-        if (res.data == null || res.data!.isEmpty) {
-          emit(state.copyWith(
-            status: ELoadingStatus.loaded,
-            queryResult: [event.fireQuery],
-          ));
-        } else {
-          emit(state.copyWith(
-            status: ELoadingStatus.loaded,
-            queryResult: res.data,
-          ));
+        List<String> result = [];
+        result.addAll(res.data ?? []);
+
+        if (res.data == null || res.data?.contains(event.fireQuery) == false) {
+          result.add(event.fireQuery);
         }
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          queryResult: result,
+        ));
       },
       state: state,
       emit: emit,

@@ -10,7 +10,7 @@ class SearchRepositoryimplDev implements ISearchRepository {
   }) async {
     var resTmp = ResModel<List<String>>(
       code: 1000,
-      data: [for (int i = 0; i < 10; i++) "$query $i"],
+      data: [for (int i = 0; i < 5; i++) "$query $i"],
     ).toJson(
       (children) => children.map((tag) => tag).toList(),
     );

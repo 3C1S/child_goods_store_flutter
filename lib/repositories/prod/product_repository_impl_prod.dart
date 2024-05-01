@@ -4,7 +4,6 @@ import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
@@ -151,7 +150,7 @@ class ProductRepositoryImplProd implements IProductRepository {
 
     var resModel = ResModel<int>.fromJson(
       res.data,
-      (json) => int.parse(json),
+      (json) => json as int,
     );
 
     return resModel;
