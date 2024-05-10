@@ -7,11 +7,11 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/address/address_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/repositories/data_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/data_repository_interface.dart';
 
 class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState>
     with DioExceptionHandlerMixin {
-  final DataRepository dataRepository;
+  final IDataRepository dataRepository;
   final EHttpMethod httpMethod;
 
   EditAddressBloc({

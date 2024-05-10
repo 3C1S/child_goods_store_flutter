@@ -28,7 +28,7 @@ mixin _$UserProfileModel {
   int? get followingNum => throw _privateConstructorUsedError;
   bool? get isFollowed => throw _privateConstructorUsedError;
   double? get averageStars => throw _privateConstructorUsedError;
-  DateTime? get createAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $UserProfileModelCopyWith<$Res> {
       int? followingNum,
       bool? isFollowed,
       double? averageStars,
-      DateTime? createAt});
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
     Object? followingNum = freezed,
     Object? isFollowed = freezed,
     Object? averageStars = freezed,
-    Object? createAt = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -110,9 +110,9 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
           ? _value.averageStars
           : averageStars // ignore: cast_nullable_to_non_nullable
               as double?,
-      createAt: freezed == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
   }
@@ -135,7 +135,7 @@ abstract class _$$UserProfileModelImplCopyWith<$Res>
       int? followingNum,
       bool? isFollowed,
       double? averageStars,
-      DateTime? createAt});
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -157,7 +157,7 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
     Object? followingNum = freezed,
     Object? isFollowed = freezed,
     Object? averageStars = freezed,
-    Object? createAt = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_$UserProfileModelImpl(
       userId: freezed == userId
@@ -192,9 +192,9 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
           ? _value.averageStars
           : averageStars // ignore: cast_nullable_to_non_nullable
               as double?,
-      createAt: freezed == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -212,7 +212,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
       this.followingNum,
       this.isFollowed,
       this.averageStars,
-      this.createAt});
+      this.createdAt});
 
   factory _$UserProfileModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserProfileModelImplFromJson(json);
@@ -234,11 +234,11 @@ class _$UserProfileModelImpl implements _UserProfileModel {
   @override
   final double? averageStars;
   @override
-  final DateTime? createAt;
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'UserProfileModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, followNum: $followNum, followingNum: $followingNum, isFollowed: $isFollowed, averageStars: $averageStars, createAt: $createAt)';
+    return 'UserProfileModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, followNum: $followNum, followingNum: $followingNum, isFollowed: $isFollowed, averageStars: $averageStars, createdAt: $createdAt)';
   }
 
   @override
@@ -261,14 +261,14 @@ class _$UserProfileModelImpl implements _UserProfileModel {
                 other.isFollowed == isFollowed) &&
             (identical(other.averageStars, averageStars) ||
                 other.averageStars == averageStars) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, nickName, introduce,
-      profileImg, followNum, followingNum, isFollowed, averageStars, createAt);
+      profileImg, followNum, followingNum, isFollowed, averageStars, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -295,7 +295,7 @@ abstract class _UserProfileModel implements UserProfileModel {
       final int? followingNum,
       final bool? isFollowed,
       final double? averageStars,
-      final DateTime? createAt}) = _$UserProfileModelImpl;
+      final DateTime? createdAt}) = _$UserProfileModelImpl;
 
   factory _UserProfileModel.fromJson(Map<String, dynamic> json) =
       _$UserProfileModelImpl.fromJson;
@@ -317,7 +317,7 @@ abstract class _UserProfileModel implements UserProfileModel {
   @override
   double? get averageStars;
   @override
-  DateTime? get createAt;
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$UserProfileModelImplCopyWith<_$UserProfileModelImpl> get copyWith =>

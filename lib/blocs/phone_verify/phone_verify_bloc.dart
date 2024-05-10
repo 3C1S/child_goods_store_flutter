@@ -3,12 +3,12 @@ import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_state.
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
-import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PhoneVerifyBloc extends Bloc<PhoneVerifyEvent, PhoneVerifyState>
     with DioExceptionHandlerMixin {
-  final AuthRepository authRepository;
+  final IAuthRepository authRepository;
 
   PhoneVerifyBloc({
     required this.authRepository,

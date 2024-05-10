@@ -13,7 +13,7 @@ import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/pages/product_detail/widgets/product_detail_buyer_list.dart';
-import 'package:child_goods_store_flutter/repositories/product_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:child_goods_store_flutter/widgets/app_bottom_sheet.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
@@ -124,7 +124,7 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProductBuyerBloc(
-        productRepository: context.read<ProductRepository>(),
+        productRepository: context.read<IProductRepository>(),
         productId:
             context.read<ProductDetailBloc>().state.productModel!.productId!,
       ),

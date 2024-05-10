@@ -13,7 +13,7 @@ class PurchaseModel with _$PurchaseModel {
     )
     EChatItemType? category,
     int? id,
-    String? name,
+    String? title,
     String? sellerName,
     int? price,
     DateTime? saleCompleteDate,

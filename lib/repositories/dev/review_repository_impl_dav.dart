@@ -1,28 +1,16 @@
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/review/review_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/review_repository_interface.dart';
 
-class ReviewRepository {
+class ReviewRepositoryImplDev implements IReviewRepository {
   ///
   /// API 14
+  @override
   Future<ResModel<List<ReviewModel>>> getReviewList({
     required int userId,
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get(
-    //   '/review/$userId',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ReviewModel>>(
@@ -65,17 +53,10 @@ class ReviewRepository {
 
   ///
   /// API 15
+  @override
   Future<ResModel<void>> postReview({
     required ReviewModel review,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/review',
-    //   data: review.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);
@@ -87,17 +68,10 @@ class ReviewRepository {
 
   ///
   /// API 16
+  @override
   Future<ResModel<void>> patchReview({
     required ReviewModel review,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.patch(
-    //   '/review/${review.reviewId}',
-    //   data: review.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);
@@ -109,14 +83,10 @@ class ReviewRepository {
 
   ///
   /// API 22
+  @override
   Future<ResModel<void>> deleteReview({
     required int reviewId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.delete('/review/$reviewId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);

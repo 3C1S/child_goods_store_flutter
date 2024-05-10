@@ -1,22 +1,16 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/child_repository_interface.dart';
 
-class ChildRepository {
+class ChildRepositoryImplDev implements IChildRepository {
   ///
   /// API 11
+  @override
   Future<ResModel<List<ChildModel>>> getChild() async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/child');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ChildModel>>(
@@ -57,17 +51,10 @@ class ChildRepository {
 
   ///
   /// API 12
+  @override
   Future<ResModel<ChildModel>> postChild({
     required ChildModel child,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/child',
-    //   data: child.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(
@@ -94,17 +81,10 @@ class ChildRepository {
 
   ///
   /// API 13
+  @override
   Future<ResModel<ChildModel>> patchChild({
     required ChildModel child,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.patch(
-    //   '/child',
-    //   data: child.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(
@@ -130,20 +110,11 @@ class ChildRepository {
   }
 
   /// API 102
+  @override
   Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
     required int childId,
     required int page,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get(
-    //   '/child/$childId',
-    //   queryParameters: {
-    //     'page': page,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ProductPreviewModel>>(

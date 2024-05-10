@@ -7,15 +7,15 @@ import 'package:child_goods_store_flutter/enums/http_method.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/review/review_model.dart';
-import 'package:child_goods_store_flutter/repositories/product_repository.dart';
-import 'package:child_goods_store_flutter/repositories/review_repository.dart';
-import 'package:child_goods_store_flutter/repositories/together_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
+import 'package:child_goods_store_flutter/repositories/interface/review_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
 
 class EditReviewBloc extends Bloc<EditReviewEvent, EditReviewState>
     with DioExceptionHandlerMixin {
-  final ReviewRepository reviewRepository;
-  final ProductRepository productRepository;
-  final TogetherRepository togetherRepository;
+  final IReviewRepository reviewRepository;
+  final IProductRepository productRepository;
+  final ITogetherRepository togetherRepository;
   final EHttpMethod httpMethod;
   final int id;
   final EChatItemType type;

@@ -13,7 +13,7 @@ class UserModel with _$UserModel {
     // String? phoneNum, // deprecated
     String? region,
     String? town,
-    DateTime? createAt,
+    DateTime? createdAt,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

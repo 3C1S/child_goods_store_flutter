@@ -17,9 +17,9 @@ _$UserProfileModelImpl _$$UserProfileModelImplFromJson(
       followingNum: json['followingNum'] as int?,
       isFollowed: json['isFollowed'] as bool?,
       averageStars: (json['averageStars'] as num?)?.toDouble(),
-      createAt: json['createAt'] == null
+      createdAt: json['createdAt'] == null
           ? null
-          : DateTime.parse(json['createAt'] as String),
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$UserProfileModelImplToJson(
@@ -33,5 +33,5 @@ Map<String, dynamic> _$$UserProfileModelImplToJson(
       'followingNum': instance.followingNum,
       'isFollowed': instance.isFollowed,
       'averageStars': instance.averageStars,
-      'createAt': instance.createAt?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
     };

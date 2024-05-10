@@ -2,12 +2,12 @@ import 'package:child_goods_store_flutter/blocs/product/buyer/product_buyer_even
 import 'package:child_goods_store_flutter/blocs/product/buyer/product_buyer_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
-import 'package:child_goods_store_flutter/repositories/product_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductBuyerBloc extends Bloc<ProductBuyerEvent, ProductBuyerState>
     with DioExceptionHandlerMixin {
-  final ProductRepository productRepository;
+  final IProductRepository productRepository;
   final int productId;
 
   ProductBuyerBloc({

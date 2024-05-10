@@ -1,19 +1,17 @@
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
-class AuthRepository {
+class AuthRepositoryImplDev implements IAuthRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['openid', 'email'],
   );
 
+  @override
   Future<String> signinWithGoogle() async {
     final GoogleSignInAccount? googleSignInAccount =
         await _googleSignIn.signIn();
@@ -35,11 +33,13 @@ class AuthRepository {
     return googleAuth.accessToken!;
   }
 
+  @override
   Future<void> signoutWithGoogle() async {
     await _googleSignIn.signOut();
     return;
   }
 
+  @override
   Future<String> signinWithKakao() async {
     if (await isKakaoTalkInstalled()) {
       try {
@@ -62,6 +62,7 @@ class AuthRepository {
     }
   }
 
+  @override
   Future<String> signinWithNaver() async {
     NaverLoginResult result = await FlutterNaverLogin.logIn();
 
@@ -77,6 +78,7 @@ class AuthRepository {
     return accessToken.accessToken;
   }
 
+  @override
   Future<void> signoutWithNaver() async {
     await FlutterNaverLogin.logOut();
     return;
@@ -84,21 +86,11 @@ class AuthRepository {
 
   ///
   /// API 1
+  @override
   Future<ResModel<String>> signinWithOauth2({
     required EAuthMethod method,
     required String accessToken,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // var res = await dio.post(
-    //   '/oauth',
-    //   data: {
-    //     'method': method.key,
-    //     'accessToken': accessToken,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<String>(
@@ -116,21 +108,11 @@ class AuthRepository {
 
   ///
   /// API 2
+  @override
   Future<ResModel<String>> signinWith3C1S({
     required String email,
     required String password,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // var res = await dio.post(
-    //   '/login',
-    //   data: {
-    //     'email': email,
-    //     'password': password,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<String>(
@@ -148,23 +130,12 @@ class AuthRepository {
 
   ///
   /// API 3
+  @override
   Future<ResModel<void>> postSignup({
     required String email,
     required String password,
     // required String phoneNum,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.post(
-    //   '/signup',
-    //   data: {
-    //     'email': email,
-    //     'password': password,
-    //     'phoneNum': phoneNum,
-    //   }
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
@@ -176,19 +147,10 @@ class AuthRepository {
 
   ///
   /// API 4
+  @override
   Future<ResModel<void>> postEmailSend({
     required String email,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.post(
-    //   '/email/send',
-    //   data: {
-    //     'email': email,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
@@ -200,21 +162,11 @@ class AuthRepository {
 
   ///
   /// API 5
+  @override
   Future<ResModel<void>> postEmailVerify({
     required String email,
     required String code,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.post(
-    //   '/email/verify',
-    //   data: {
-    //     'email': email,
-    //     'authNum': code,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);

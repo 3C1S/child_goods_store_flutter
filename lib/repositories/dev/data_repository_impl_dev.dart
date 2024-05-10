@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'package:child_goods_store_flutter/enums/address_category.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/address/address_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/data_repository_interface.dart';
 import 'package:flutter/services.dart';
 
-class DataRepository {
+class DataRepositoryImplDev implements IDataRepository {
+  @override
   Future<Map<String, List<String>>> getAdminDistrict() async {
     // Get json data
     var jsonStr = await rootBundle
@@ -27,12 +26,8 @@ class DataRepository {
 
   ///
   /// API 17
+  @override
   Future<ResModel<List<AddressModel>>> getAddress() async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/address');
-
-    // TODO: connect api
     var resTmp = ResModel<List<AddressModel>>(
       code: 1000,
       data: [
@@ -65,17 +60,10 @@ class DataRepository {
 
   ///
   /// API 18
+  @override
   Future<ResModel<AddressModel>> postAddress({
     required AddressModel address,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/address',
-    //   data: address.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<AddressModel>(
@@ -98,20 +86,10 @@ class DataRepository {
 
   ///
   /// API 19
+  @override
   Future<ResModel<AddressModel>> patchAddress({
     required AddressModel address,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.patch(
-    //   '/address',
-    //   queryParameters: {
-    //     'addressId': address.addressId,
-    //   },
-    //   data: address.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<AddressModel>(

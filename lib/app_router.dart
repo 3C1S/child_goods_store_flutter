@@ -51,16 +51,16 @@ import 'package:child_goods_store_flutter/pages/signup/signup_page.dart';
 import 'package:child_goods_store_flutter/pages/splash/splash_page.dart';
 import 'package:child_goods_store_flutter/pages/together/together_page.dart';
 import 'package:child_goods_store_flutter/pages/together_detail/together_detail_page.dart';
-import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
-import 'package:child_goods_store_flutter/repositories/child_repository.dart';
-import 'package:child_goods_store_flutter/repositories/data_repository.dart';
-import 'package:child_goods_store_flutter/repositories/image_repository.dart';
-import 'package:child_goods_store_flutter/repositories/product_repository.dart';
-import 'package:child_goods_store_flutter/repositories/profile_repository.dart';
-import 'package:child_goods_store_flutter/repositories/review_repository.dart';
-import 'package:child_goods_store_flutter/repositories/search_repository.dart';
-import 'package:child_goods_store_flutter/repositories/together_repository.dart';
-import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
+import 'package:child_goods_store_flutter/repositories/interface/child_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/data_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/image_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
+import 'package:child_goods_store_flutter/repositories/interface/profile_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/review_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/search_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
 import 'package:child_goods_store_flutter/utils/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,8 +84,8 @@ class _AppRouterState extends State<AppRouter> {
 
     // Initialize AuthBlocSingleton
     AuthBlocSingleton.initializer(
-      authRepository: context.read<AuthRepository>(),
-      userRepository: context.read<UserRepository>(),
+      authRepository: context.read<IAuthRepository>(),
+      userRepository: context.read<IUserRepository>(),
     );
 
     // Setting router configs
@@ -146,7 +146,7 @@ class _AppRouterState extends State<AppRouter> {
             name: state.fullPath,
             child: BlocProvider(
               create: (context) => SignupBloc(
-                authRepository: context.read<AuthRepository>(),
+                authRepository: context.read<IAuthRepository>(),
               ),
               child: const SignupPage(),
             ),
@@ -172,8 +172,8 @@ class _AppRouterState extends State<AppRouter> {
             name: state.fullPath,
             child: BlocProvider(
               create: (context) => EditProfileBloc(
-                userRepository: context.read<UserRepository>(),
-                imageRepository: context.read<ImageRepository>(),
+                userRepository: context.read<IUserRepository>(),
+                imageRepository: context.read<IImageRepository>(),
                 user: AuthBlocSingleton.bloc.state.user,
                 httpMethod:
                     (AuthBlocSingleton.bloc.state.user?.nickName == null ||
@@ -193,7 +193,7 @@ class _AppRouterState extends State<AppRouter> {
             name: state.fullPath,
             child: BlocProvider(
               create: (context) => EditTagBloc(
-                searchRepository: context.read<SearchRepository>(),
+                searchRepository: context.read<ISearchRepository>(),
                 tags: (state.extra as GoRouterExtraModel<List<String>>?)?.data,
               ),
               child: const EditTagPage(),
@@ -207,7 +207,7 @@ class _AppRouterState extends State<AppRouter> {
             name: state.fullPath,
             child: BlocProvider(
               create: (context) => EditAddressBloc(
-                dataRepository: context.read<DataRepository>(),
+                dataRepository: context.read<IDataRepository>(),
                 httpMethod:
                     (state.extra as GoRouterExtraModel<AddressModel>?)?.data ==
                             null
@@ -283,7 +283,7 @@ class _AppRouterState extends State<AppRouter> {
                   path: Routes.home,
                   builder: (context, state) => BlocProvider(
                     create: (context) => ProductListBloc(
-                      productRepository: context.read<ProductRepository>(),
+                      productRepository: context.read<IProductRepository>(),
                     ),
                     child: const HomePage(),
                   ),
@@ -297,7 +297,7 @@ class _AppRouterState extends State<AppRouter> {
                   path: Routes.together,
                   builder: (context, state) => BlocProvider(
                     create: (context) => TogetherListBloc(
-                      togetherRepository: context.read<TogetherRepository>(),
+                      togetherRepository: context.read<ITogetherRepository>(),
                     ),
                     child: const TogetherPage(),
                   ),
@@ -311,7 +311,7 @@ class _AppRouterState extends State<AppRouter> {
                   path: Routes.child,
                   builder: (context, state) => BlocProvider(
                     create: (context) => ChildBloc(
-                      childRepository: context.read<ChildRepository>(),
+                      childRepository: context.read<IChildRepository>(),
                     ),
                     child: const ChildPage(),
                   ),
@@ -336,14 +336,14 @@ class _AppRouterState extends State<AppRouter> {
                     providers: [
                       BlocProvider(
                         create: (context) => ProfileBloc(
-                          userRepository: context.read<UserRepository>(),
+                          userRepository: context.read<IUserRepository>(),
                           userId: AuthBlocSingleton.bloc.state.user!.userId!,
                         ),
                       ),
                       BlocProvider(
                         create: (context) => ProfileTabBloc(
-                          profileRepository: context.read<ProfileRepository>(),
-                          reviewRepository: context.read<ReviewRepository>(),
+                          profileRepository: context.read<IProfileRepository>(),
+                          reviewRepository: context.read<IReviewRepository>(),
                           userId: AuthBlocSingleton.bloc.state.user!.userId!,
                         ),
                       ),
@@ -367,7 +367,7 @@ class _AppRouterState extends State<AppRouter> {
             },
             child: BlocProvider(
               create: (context) => ProductDetailBloc(
-                productRepository: context.read<ProductRepository>(),
+                productRepository: context.read<IProductRepository>(),
                 productId:
                     int.parse(state.pathParameters['productId'] as String),
               ),
@@ -385,7 +385,7 @@ class _AppRouterState extends State<AppRouter> {
             },
             child: BlocProvider(
               create: (context) => TogetherDetailBloc(
-                togetherRepository: context.read<TogetherRepository>(),
+                togetherRepository: context.read<ITogetherRepository>(),
                 togetherId:
                     int.parse(state.pathParameters['togetherId'] as String),
               ),
@@ -405,14 +405,14 @@ class _AppRouterState extends State<AppRouter> {
               providers: [
                 BlocProvider(
                   create: (context) => ProfileBloc(
-                    userRepository: context.read<UserRepository>(),
+                    userRepository: context.read<IUserRepository>(),
                     userId: int.parse(state.pathParameters['userId'] as String),
                   ),
                 ),
                 BlocProvider(
                   create: (context) => ProfileTabBloc(
-                    profileRepository: context.read<ProfileRepository>(),
-                    reviewRepository: context.read<ReviewRepository>(),
+                    profileRepository: context.read<IProfileRepository>(),
+                    reviewRepository: context.read<IReviewRepository>(),
                     userId: int.parse(state.pathParameters['userId'] as String),
                   ),
                 ),
@@ -433,7 +433,7 @@ class _AppRouterState extends State<AppRouter> {
             },
             child: BlocProvider(
               create: (context) => FollowBloc(
-                userRepository: context.read<UserRepository>(),
+                userRepository: context.read<IUserRepository>(),
                 userId: int.parse(state.pathParameters['userId'] as String),
                 mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
@@ -456,8 +456,8 @@ class _AppRouterState extends State<AppRouter> {
             },
             child: BlocProvider(
               create: (context) => EditProductBloc(
-                productRepository: context.read<ProductRepository>(),
-                imageRepository: context.read<ImageRepository>(),
+                productRepository: context.read<IProductRepository>(),
+                imageRepository: context.read<IImageRepository>(),
                 httpMethod:
                     (state.extra as GoRouterExtraModel<ProductModel>?)?.data ==
                             null
@@ -483,8 +483,8 @@ class _AppRouterState extends State<AppRouter> {
             },
             child: BlocProvider(
               create: (context) => EditTogetherBloc(
-                togetherRepository: context.read<TogetherRepository>(),
-                imageRepository: context.read<ImageRepository>(),
+                togetherRepository: context.read<ITogetherRepository>(),
+                imageRepository: context.read<IImageRepository>(),
                 httpMethod:
                     (state.extra as GoRouterExtraModel<TogetherModel>?)?.data ==
                             null
@@ -510,8 +510,8 @@ class _AppRouterState extends State<AppRouter> {
             },
             child: BlocProvider(
               create: (context) => EditChildBloc(
-                childRepository: context.read<ChildRepository>(),
-                imageRepository: context.read<ImageRepository>(),
+                childRepository: context.read<IChildRepository>(),
+                imageRepository: context.read<IImageRepository>(),
                 httpMethod:
                     (state.extra as GoRouterExtraModel<ChildModel>?)?.data ==
                             null
@@ -536,9 +536,9 @@ class _AppRouterState extends State<AppRouter> {
             },
             child: BlocProvider(
               create: (context) => EditReviewBloc(
-                reviewRepository: context.read<ReviewRepository>(),
-                productRepository: context.read<ProductRepository>(),
-                togetherRepository: context.read<TogetherRepository>(),
+                reviewRepository: context.read<IReviewRepository>(),
+                productRepository: context.read<IProductRepository>(),
+                togetherRepository: context.read<ITogetherRepository>(),
                 httpMethod:
                     (state.extra as GoRouterExtraModel<ReviewModel>?)?.data ==
                             null

@@ -1,6 +1,6 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc.dart';
-import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
-import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
+import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
 
 class AuthBlocSingleton {
   AuthBlocSingleton._constructor();
@@ -11,8 +11,8 @@ class AuthBlocSingleton {
   static AuthBloc get bloc => _bloc;
 
   static initializer({
-    required AuthRepository authRepository,
-    required UserRepository userRepository,
+    required IAuthRepository authRepository,
+    required IUserRepository userRepository,
   }) {
     _bloc = AuthBloc(
       authRepository: authRepository,

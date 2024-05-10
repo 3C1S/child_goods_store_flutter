@@ -1,23 +1,19 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
-import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/enums/product_state.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
-import 'package:child_goods_store_flutter/main_prod.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 
-class ProductRepository {
+class ProductRepositoryImplDev implements IProductRepository {
   ///
   /// API 101
+  @override
   Future<ResModel<List<ProductPreviewModel>>> getProductList({
     required ESearchRange region,
     EMainCategory? mainCategory,
@@ -46,14 +42,6 @@ class ProductRepository {
       queryParams['maxPrice'] = maxPrice;
     }
 
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get(
-    //   '/product',
-    //   queryParameters: queryParams,
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ProductPreviewModel>>(
@@ -87,14 +75,10 @@ class ProductRepository {
 
   ///
   /// API 106
+  @override
   Future<ResModel<ProductModel>> getProduct({
     required int productId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/product/$productId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ProductModel>(
@@ -114,8 +98,8 @@ class ProductRepository {
         productState: EProductState.littleUsage,
         state: EProductSaleState.sale,
         age: EChildAge.age24,
-        createAt: DateTime.now(),
-        updateAt: DateTime.now(),
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
         tag: List.generate(3, (index) => '$productId-$index tag'),
         productImage: [
           'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
@@ -136,14 +120,10 @@ class ProductRepository {
 
   ///
   /// API 107
+  @override
   Future<ResModel<void>> postProductHeart({
     required int productId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post('/product/heart/$productId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);
@@ -155,14 +135,10 @@ class ProductRepository {
 
   ///
   /// API 108
+  @override
   Future<ResModel<void>> deleteProductHeart({
     required int productId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.delete('/product/heart/$productId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);
@@ -174,17 +150,10 @@ class ProductRepository {
 
   ///
   /// API 109
+  @override
   Future<ResModel<int>> postProduct({
     required ProductModel product,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/product',
-    //   data: product.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<int>(
@@ -204,17 +173,10 @@ class ProductRepository {
 
   ///
   /// API 110
+  @override
   Future<ResModel<int>> patchProduct({
     required ProductModel product,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.patch(
-    //   '/product/${product.productId}',
-    //   data: product.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<int>(
@@ -234,22 +196,12 @@ class ProductRepository {
 
   ///
   /// API 111
+  @override
   Future<ResModel<void>> postProductState({
     required int productId,
     required EProductSaleState state,
     int? saledUserId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/product/state/$productId',
-    //   data: {
-    //     'state': state.key,
-    //     'userId': saledUserId ?? -1,
-    //   },
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);
@@ -261,14 +213,10 @@ class ProductRepository {
 
   ///
   /// API 112
+  @override
   Future<ResModel<List<UserProfileModel>>> getProductBuyer({
     required int productId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/product/buyer/$productId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<UserProfileModel>>(

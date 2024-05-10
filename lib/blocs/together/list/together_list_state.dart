@@ -34,7 +34,7 @@ class TogetherListState extends BlocState {
         age = null,
         applyFilter = true,
         togethers = const [],
-        page = 1,
+        page = 0,
         super(
           status: ELoadingStatus.init,
           message: null,

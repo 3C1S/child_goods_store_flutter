@@ -1,16 +1,17 @@
 import 'package:child_goods_store_flutter/blocs/follow/follow_event.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_state.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/follow_mode.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_model.dart';
-import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FollowBloc extends Bloc<FollowEvent, FollowState>
     with DioExceptionHandlerMixin {
-  final UserRepository userRepository;
+  final IUserRepository userRepository;
   final int userId;
   final EFollowMode mode;
 
@@ -49,9 +50,23 @@ class FollowBloc extends Bloc<FollowEvent, FollowState>
             break;
         }
 
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
+
+        List<UserModel> newList = [];
+        newList
+          ..addAll(state.userList)
+          ..addAll(res.data ?? []);
+
         emit(state.copyWith(
           status: ELoadingStatus.loaded,
-          userList: res.data,
+          userList: newList,
           page: state.page + 1,
         ));
       },

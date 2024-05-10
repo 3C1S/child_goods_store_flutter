@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_event.dart';
 import 'package:child_goods_store_flutter/configs/configs.dart';
@@ -26,17 +27,16 @@ class AuthInterceptor extends Interceptor {
     final jwt = await _storage.read(key: Strings.jwtToken);
 
     // 기타 헤더 작성
-    options.headers['Content-Type'] = contentType;
+    options.headers[HttpHeaders.contentTypeHeader] = contentType;
 
     // time-out 설정
     options.receiveTimeout = const Duration(seconds: 5);
 
     // 매 요청마다 헤더에 token 포함
-    options.headers['Authorization'] = 'Bearer $jwt';
+    options.headers[HttpHeaders.authorizationHeader] = 'Bearer $jwt';
 
     // base url 설정
     options.baseUrl = Configs.instance.baseUrl;
-
     // Logging
     debugPrint(
       '[REQ] [${options.method}] ${options.uri}',
@@ -52,24 +52,8 @@ class AuthInterceptor extends Interceptor {
   ) async {
     // Logging
     debugPrint(
-      '[RES] [${response.requestOptions.method}] ${response.requestOptions.uri}',
+      '[RES / ${response.statusCode}] [${response.requestOptions.method}] ${response.requestOptions.uri}',
     );
-
-    // Error handling
-    var res = ResModel.fromJson(response.data, (json) => null);
-    if (res.code != 1000) {
-      if (res.code == 2000) {
-        AuthBlocSingleton.bloc.add(AuthSignout());
-      }
-      handler.reject(
-        DioException.connectionError(
-          requestOptions: response.requestOptions,
-          reason: res.message ?? Strings.unknownFail,
-          error: res,
-        ),
-      );
-      return;
-    }
 
     handler.next(response);
   }
@@ -81,19 +65,25 @@ class AuthInterceptor extends Interceptor {
   ) async {
     // Logging
     debugPrint(
-      '[ERR] [${err.requestOptions.method}] ${err.requestOptions.uri}',
-    );
-    debugPrint(
-      '[ERR] code: ${err.response?.statusCode}',
+      '[ERR / ${err.response?.statusCode}] [${err.requestOptions.method}] ${err.requestOptions.uri}',
     );
 
+    // Error handling
+    var httpResCode = err.response?.statusCode;
+
+    // jwt token error
+    if (httpResCode == 500 || httpResCode == 401) {
+      AuthBlocSingleton.bloc.add(AuthSignout());
+    }
+
+    var res = ResModel.fromJson(err.response?.data, (json) => null);
     handler.reject(
       DioException.connectionError(
         requestOptions: err.requestOptions,
-        reason: err.message ?? Strings.unknownFail,
-        error: ResModel(
-          code: 5000,
-          message: '통신에 실패했습니다.',
+        reason: res.message ?? Strings.unknownFail,
+        error: res.copyWith(
+          code: res.code == -1 ? 5000 : res.code,
+          message: res.message ?? Strings.unknownFail,
         ),
       ),
     );

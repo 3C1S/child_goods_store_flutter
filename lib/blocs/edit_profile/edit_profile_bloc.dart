@@ -9,14 +9,14 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_model.dart';
-import 'package:child_goods_store_flutter/repositories/image_repository.dart';
-import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/image_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState>
     with DioExceptionHandlerMixin {
-  final UserRepository userRepository;
-  final ImageRepository imageRepository;
+  final IUserRepository userRepository;
+  final IImageRepository imageRepository;
   final EHttpMethod httpMethod;
 
   EditProfileBloc({

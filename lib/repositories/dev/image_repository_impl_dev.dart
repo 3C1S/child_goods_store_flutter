@@ -1,38 +1,15 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:child_goods_store_flutter/enums/image_category.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/image_repository_interface.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImageRepository {
-  @deprecated
+class ImageRepositoryImplDev implements IImageRepository {
+  @override
   Future<ResModel<String>> postImage({
     required XFile image,
     String? name,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor(
-    //   contentType: 'multipart/form-data',
-    // ));
-    // // Convert to Multipart
-    // MultipartFile mulImage = await MultipartFile.fromFile(
-    //   File(image.path).path,
-    //   filename: name ?? image.path,
-    // );
-    // // Create formdata
-    // FormData formData = FormData.fromMap({
-    //   'file': mulImage,
-    // });
-    // // Post
-    // dio.post(
-    //   '/image',
-    //   data: formData,
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<String>(
@@ -49,35 +26,12 @@ class ImageRepository {
     return res;
   }
 
+  @override
   Future<ResModel<List<String>>> postImageList({
     required List<XFile> images,
     required EImageCategory category,
     String? name,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor(
-    //   contentType: 'multipart/form-data',
-    // ));
-    // // Convert to Multipart
-    // List<MultipartFile> mulImages = [];
-    // for (int i = 1; i < images.length + 1; i++) {
-    //   mulImages.add(await MultipartFile.fromFile(
-    //     File(images[i].path).path,
-    //     filename: name != null ? '${name}_$i' : images[i].path,
-    //   ));
-    // }
-    // // Create formdata
-    // FormData formData = FormData.fromMap({
-    //   'category': category.key,
-    //   'images': mulImages,
-    // });
-    // // Post
-    // dio.post(
-    //   '/image',
-    //   data: formData,
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<String>>(

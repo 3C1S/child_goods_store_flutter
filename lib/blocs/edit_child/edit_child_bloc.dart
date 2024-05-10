@@ -7,14 +7,14 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
-import 'package:child_goods_store_flutter/repositories/child_repository.dart';
-import 'package:child_goods_store_flutter/repositories/image_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/child_repository_interface.dart';
+import 'package:child_goods_store_flutter/repositories/interface/image_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditChildBloc extends Bloc<EditChildEvent, EditChildState>
     with DioExceptionHandlerMixin {
-  final ChildRepository childRepository;
-  final ImageRepository imageRepository;
+  final IChildRepository childRepository;
+  final IImageRepository imageRepository;
   final EHttpMethod httpMethod;
 
   EditChildBloc({

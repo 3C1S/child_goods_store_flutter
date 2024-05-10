@@ -11,7 +11,7 @@ _$ResModelImpl<T> _$$ResModelImplFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     _$ResModelImpl<T>(
-      code: json['code'] as int,
+      code: castToInt(json['code']),
       message: json['message'] as String?,
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
     );

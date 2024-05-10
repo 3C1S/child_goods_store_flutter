@@ -20,12 +20,12 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
       productState: EProductState.fromJson(json['productState'] as String?),
       state: EProductSaleState.fromJson(json['state'] as String?),
       age: EChildAge.fromJson(json['age'] as String?),
-      createAt: json['createAt'] == null
+      createdAt: json['createdAt'] == null
           ? null
-          : DateTime.parse(json['createAt'] as String),
-      updateAt: json['updateAt'] == null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
           ? null
-          : DateTime.parse(json['updateAt'] as String),
+          : DateTime.parse(json['updatedAt'] as String),
       tag: (json['tag'] as List<dynamic>?)?.map((e) => e as String).toList() ??
           const [],
       productImage: (json['productImage'] as List<dynamic>?)
@@ -47,8 +47,8 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
       'productState': EProductState.toJson(instance.productState),
       'state': EProductSaleState.toJson(instance.state),
       'age': EChildAge.toJson(instance.age),
-      'createAt': instance.createAt?.toIso8601String(),
-      'updateAt': instance.updateAt?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
       'tag': instance.tag,
       'productImage': instance.productImage,
       'productHeart': instance.productHeart,

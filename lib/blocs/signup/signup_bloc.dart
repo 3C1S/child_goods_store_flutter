@@ -3,12 +3,12 @@ import 'package:child_goods_store_flutter/blocs/signup/signup_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
-import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
+import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState>
     with DioExceptionHandlerMixin {
-  final AuthRepository authRepository;
+  final IAuthRepository authRepository;
 
   SignupBloc({
     required this.authRepository,

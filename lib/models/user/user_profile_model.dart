@@ -14,7 +14,7 @@ class UserProfileModel with _$UserProfileModel {
     int? followingNum,
     bool? isFollowed,
     double? averageStars,
-    DateTime? createAt,
+    DateTime? createdAt,
   }) = _UserProfileModel;
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) =>

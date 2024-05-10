@@ -1,22 +1,18 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
-import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
-import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
-import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
-import 'package:child_goods_store_flutter/models/user/user_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
-import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
-import 'package:dio/dio.dart';
+import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
 
-class TogetherRepository {
+class TogetherRepositoryImplDev implements ITogetherRepository {
   ///
   /// API 201
+  @override
   Future<ResModel<List<TogetherPreviewModel>>> getTogetherList({
     required ESearchRange region,
     EMainCategory? mainCategory,
@@ -37,14 +33,6 @@ class TogetherRepository {
       queryParams['age'] = age.key;
     }
 
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get(
-    //   '/together',
-    //   queryParameters: queryParams,
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<TogetherPreviewModel>>(
@@ -81,14 +69,10 @@ class TogetherRepository {
 
   ///
   /// API 205
+  @override
   Future<ResModel<TogetherModel>> getTogether({
     required int togetherId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/together/$togetherId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<TogetherModel>(
@@ -134,14 +118,10 @@ class TogetherRepository {
 
   ///
   ///  API 206
+  @override
   Future<ResModel<void>> postTogetherHeart({
     required int togetherId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post('/together/heart/$togetherId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);
@@ -153,14 +133,10 @@ class TogetherRepository {
 
   ///
   /// API 207
+  @override
   Future<ResModel<void>> deleteTogetherHeart({
     required int togetherId,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.delete('/together/heart/$togetherId');
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel(code: 1000).toJson((p0) => null);
@@ -171,17 +147,10 @@ class TogetherRepository {
   }
 
   /// API 208
+  @override
   Future<ResModel<int>> postTogether({
     required TogetherModel together,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/together',
-    //   data: together.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<int>(
@@ -200,17 +169,10 @@ class TogetherRepository {
   }
 
   /// API 209
+  @override
   Future<ResModel<int>> patchTogether({
     required TogetherModel together,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/together/${together.togetherId}',
-    //   data: together.toJson(),
-    // );
-
-    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<int>(

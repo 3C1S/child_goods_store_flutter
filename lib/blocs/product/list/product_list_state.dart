@@ -45,7 +45,7 @@ class ProductListState extends BlocState {
         maxPrice = MAX_PRICE,
         applyFilter = true,
         products = const [],
-        page = 1,
+        page = 0,
         super(
           status: ELoadingStatus.init,
           message: null,
