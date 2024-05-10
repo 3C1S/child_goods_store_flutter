@@ -132,6 +132,11 @@ class _ChildPageState extends State<ChildPage> {
             child: Center(
               child: BlocBuilder<ChildBloc, ChildState>(
                 builder: (context, state) {
+                  if (state.selectedChild == null) {
+                    return const Center(
+                      child: AppFont('자녀를 추가하여 맟춤 추천을 받아보세요!'),
+                    );
+                  }
                   if (state.status == ELoadingStatus.error) {
                     return Column(
                       mainAxisSize: MainAxisSize.min,

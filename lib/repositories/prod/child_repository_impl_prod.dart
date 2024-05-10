@@ -52,36 +52,19 @@ class ChildRepositoryImplProd implements IChildRepository {
   Future<ResModel<ChildModel>> patchChild({
     required ChildModel child,
   }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.patch(
-    //   '/child',
-    //   data: child.toJson(),
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<ChildModel>(
-      code: 1000,
-      data: ChildModel(
-        childId: child.childId,
-        name: child.name,
-        age: child.age,
-        gender: child.gender,
-        childImg: child.childImg,
-        tag: child.tag,
-      ),
-    ).toJson(
-      (child) => child.toJson(),
+    Dio dio = Dio();
+    dio.interceptors.add(AuthInterceptor());
+    var res = await dio.patch(
+      '/child',
+      data: child.toJson(),
     );
 
-    var res = ResModel<ChildModel>.fromJson(
-      resTmp,
+    var resModel = ResModel<ChildModel>.fromJson(
+      res.data,
       (json) => ChildModel.fromJson(json),
     );
 
-    return res;
+    return resModel;
   }
 
   /// API 102

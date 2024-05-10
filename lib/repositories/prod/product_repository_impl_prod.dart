@@ -166,7 +166,7 @@ class ProductRepositoryImplProd implements IProductRepository {
   }) async {
     Dio dio = Dio();
     dio.interceptors.add(AuthInterceptor());
-    var res = await dio.post(
+    var res = await dio.patch(
       '/product/state/$productId',
       data: {
         'state': state.key,
