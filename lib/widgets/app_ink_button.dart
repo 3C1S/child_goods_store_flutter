@@ -48,7 +48,11 @@ class AppInkButton extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: onTap,
+              onTap: () async {
+                // Delay for button ink animation
+                await Future.delayed(const Duration(milliseconds: 100));
+                onTap?.call();
+              },
               highlightColor: Colors.transparent,
               splashColor: Theme.of(context).splashColor,
               borderRadius: BorderRadius.circular(borderRadSize),

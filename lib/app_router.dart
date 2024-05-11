@@ -8,6 +8,8 @@ import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.d
 import 'package:child_goods_store_flutter/blocs/edit_review/edit_review_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_together/edit_together_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/fcm/fcm_cubit.dart';
+import 'package:child_goods_store_flutter/blocs/fcm/fcm_cubit_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/list/product_list_bloc.dart';
@@ -62,6 +64,7 @@ import 'package:child_goods_store_flutter/repositories/interface/search_reposito
 import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
 import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
 import 'package:child_goods_store_flutter/utils/page_transition.dart';
+import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -624,9 +627,21 @@ class _AppRouterState extends State<AppRouter> {
         Locale('en'),
       ],
       locale: const Locale('ko'),
-      builder: (context, child) => _flavorBanner(
-        child: child ?? const SizedBox(),
-        show: F.appFlavor != Flavor.prod,
+      builder: (context, child) => BlocListener<FCMCubit, FCMState>(
+        bloc: FCMCubitSingleton.cubit,
+        listener: (context, state) {
+          if (state.data != null) {
+            // TODO: Replace event
+            AppSnackbar.show(
+              context,
+              message: state.body ?? Strings.unknownFail,
+            );
+          }
+        },
+        child: _flavorBanner(
+          child: child ?? const SizedBox(),
+          show: F.appFlavor != Flavor.prod,
+        ),
       ),
     );
   }

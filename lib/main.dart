@@ -19,9 +19,12 @@
 
 import 'dart:async';
 import 'package:child_goods_store_flutter/app.dart';
+import 'package:child_goods_store_flutter/blocs/fcm/fcm_cubit_singleton.dart';
 import 'package:child_goods_store_flutter/configs/firebase_options.dart';
 import 'package:child_goods_store_flutter/GA/google_analytics.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 FutureOr<void> main() async {
@@ -30,6 +33,20 @@ FutureOr<void> main() async {
   );
 
   await GoogleAnalytics.instance.initialize();
+
+  // Request fcm permission
+  FirebaseMessaging.instance.requestPermission(
+    badge: true,
+    alert: true,
+    sound: true,
+  );
+
+  // Get fcm token
+  var fcmToken = await FirebaseMessaging.instance.getToken();
+  print('[FCM / token] $fcmToken');
+
+  // Initialize FCMCubitSingleton
+  await FCMCubitSingleton.initializer(fcmToken: fcmToken ?? Strings.nullStr);
 
   runApp(const App());
 }
