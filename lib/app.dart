@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/app_router.dart';
 import 'package:child_goods_store_flutter/blocs/app_data/app_data_bloc.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/repositories/dev/auth_repository_impl_dev.dart';
+import 'package:child_goods_store_flutter/repositories/dev/chat_repository_impl_dev.dart';
 import 'package:child_goods_store_flutter/repositories/dev/child_repository_impl_dev.dart';
 import 'package:child_goods_store_flutter/repositories/dev/data_repository_impl_dev.dart';
 import 'package:child_goods_store_flutter/repositories/dev/image_repository_impl_dev.dart';
@@ -13,6 +14,7 @@ import 'package:child_goods_store_flutter/repositories/dev/together_repository_i
 import 'package:child_goods_store_flutter/repositories/dev/user_repository_impl_dev.dart';
 import 'package:child_goods_store_flutter/repositories/interface/data_repository_interface.dart';
 import 'package:child_goods_store_flutter/repositories/prod/auth_repository_impl_prod.dart';
+import 'package:child_goods_store_flutter/repositories/prod/chat_repository_impl_prod.dart';
 import 'package:child_goods_store_flutter/repositories/prod/child_repository_impl_prod.dart';
 import 'package:child_goods_store_flutter/repositories/prod/data_repository_impl_prod.dart';
 import 'package:child_goods_store_flutter/repositories/prod/image_repository_impl_prod.dart';
@@ -66,6 +68,11 @@ class App extends StatelessWidget {
           create: (context) => F.appFlavor == Flavor.prod
               ? ReviewRepositoryImplProd()
               : ReviewRepositoryImplDev(),
+        ),
+        RepositoryProvider(
+          create: (context) => F.appFlavor == Flavor.prod
+              ? ChatRepositoryImplProd()
+              : ChatRepositoryImplDev(),
         ),
         RepositoryProvider(
           create: (context) => F.appFlavor == Flavor.prod
