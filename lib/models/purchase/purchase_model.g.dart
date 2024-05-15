@@ -9,10 +9,10 @@ part of 'purchase_model.dart';
 _$PurchaseModelImpl _$$PurchaseModelImplFromJson(Map<String, dynamic> json) =>
     _$PurchaseModelImpl(
       category: EChatItemType.fromJson(json['category'] as String?),
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       sellerName: json['sellerName'] as String?,
-      price: json['price'] as int?,
+      price: (json['price'] as num?)?.toInt(),
       saleCompleteDate: json['saleCompleteDate'] == null
           ? null
           : DateTime.parse(json['saleCompleteDate'] as String),

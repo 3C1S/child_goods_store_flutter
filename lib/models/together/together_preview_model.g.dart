@@ -9,12 +9,12 @@ part of 'together_preview_model.dart';
 _$TogetherPreviewModelImpl _$$TogetherPreviewModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TogetherPreviewModelImpl(
-      togetherId: json['togetherId'] as int?,
+      togetherId: (json['togetherId'] as num?)?.toInt(),
       togetherName: json['togetherName'] as String?,
-      totalPrice: json['totalPrice'] as int?,
-      purchasePrice: json['purchasePrice'] as int?,
-      totalNum: json['totalNum'] as int?,
-      purchaseNum: json['purchaseNum'] as int?,
+      totalPrice: (json['totalPrice'] as num?)?.toInt(),
+      purchasePrice: (json['purchasePrice'] as num?)?.toInt(),
+      totalNum: (json['totalNum'] as num?)?.toInt(),
+      purchaseNum: (json['purchaseNum'] as num?)?.toInt(),
       deadline: json['deadline'] == null
           ? null
           : DateTime.parse(json['deadline'] as String),
