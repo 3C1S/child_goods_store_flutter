@@ -24,7 +24,7 @@ class AuthInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     // jwt token 불러오기
-    final jwt = await _storage.read(key: Strings.jwtToken);
+    final jwt = (await _storage.readAll())[Strings.jwtToken];
 
     // 기타 헤더 작성
     options.headers[HttpHeaders.contentTypeHeader] = contentType;
