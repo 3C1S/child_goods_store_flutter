@@ -1,25 +1,25 @@
-import 'package:child_goods_store_flutter/blocs/chat/chat_event.dart';
-import 'package:child_goods_store_flutter/blocs/chat/chat_state.dart';
+import 'package:child_goods_store_flutter/blocs/chat/list/chat_list_event.dart';
+import 'package:child_goods_store_flutter/blocs/chat/list/chat_list_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/repositories/interface/chat_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatBloc extends Bloc<ChatEvent, ChatState>
+class ChatListBloc extends Bloc<ChatListEvent, ChatListState>
     with DioExceptionHandlerMixin {
   final IChatRepository chatRepository;
 
-  ChatBloc({
+  ChatListBloc({
     required this.chatRepository,
-  }) : super(const ChatState.init()) {
-    on<ChatGetChatRooms>(_chatGetChatRoomsHandler);
+  }) : super(const ChatListState.init()) {
+    on<ChatListGetChatRooms>(_chatListGetChatRoomsHandler);
 
-    add(ChatGetChatRooms());
+    add(ChatListGetChatRooms());
   }
 
-  Future<void> _chatGetChatRoomsHandler(
-    ChatGetChatRooms event,
-    Emitter<ChatState> emit,
+  Future<void> _chatListGetChatRoomsHandler(
+    ChatListGetChatRooms event,
+    Emitter<ChatListState> emit,
   ) async {
     if (state.status == ELoadingStatus.loading) return;
 

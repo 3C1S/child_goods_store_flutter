@@ -1,6 +1,6 @@
-import 'package:child_goods_store_flutter/blocs/chat/chat_bloc.dart';
-import 'package:child_goods_store_flutter/blocs/chat/chat_event.dart';
-import 'package:child_goods_store_flutter/blocs/chat/chat_state.dart';
+import 'package:child_goods_store_flutter/blocs/chat/list/chat_list_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/chat/list/chat_list_event.dart';
+import 'package:child_goods_store_flutter/blocs/chat/list/chat_list_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
@@ -16,7 +16,7 @@ class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
 
   void _onTapRetryGetChatRooms(BuildContext context) {
-    context.read<ChatBloc>().add(ChatGetChatRooms());
+    context.read<ChatListBloc>().add(ChatListGetChatRooms());
   }
 
   @override
@@ -27,7 +27,7 @@ class ChatPage extends StatelessWidget {
         elevation: Sizes.size1,
       ),
       body: SafeArea(
-        child: BlocBuilder<ChatBloc, ChatState>(
+        child: BlocBuilder<ChatListBloc, ChatListState>(
           builder: (context, state) {
             if (state.status == ELoadingStatus.loaded) {
               return _buildBody(context, state: state);
@@ -49,7 +49,7 @@ class ChatPage extends StatelessWidget {
 
   Widget _buildBody(
     BuildContext context, {
-    required ChatState state,
+    required ChatListState state,
   }) {
     return ListView.separated(
       itemBuilder: (context, index) => ChatRoomWidget(

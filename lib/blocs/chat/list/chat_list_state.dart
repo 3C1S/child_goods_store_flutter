@@ -2,16 +2,16 @@ import 'package:child_goods_store_flutter/blocs/abs_bloc_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
 
-class ChatState extends BlocState {
+class ChatListState extends BlocState {
   final List<ChatRoomModel> chatRooms;
 
-  const ChatState({
+  const ChatListState({
     required this.chatRooms,
     required super.status,
     super.message,
   });
 
-  const ChatState.init()
+  const ChatListState.init()
       : chatRooms = const [],
         super(
           status: ELoadingStatus.init,
@@ -19,12 +19,12 @@ class ChatState extends BlocState {
         );
 
   @override
-  ChatState copyWith({
+  ChatListState copyWith({
     List<ChatRoomModel>? chatRooms,
     ELoadingStatus? status,
     String? message,
   }) =>
-      ChatState(
+      ChatListState(
         chatRooms: chatRooms ?? this.chatRooms,
         status: status ?? this.status,
         message: message ?? this.message,

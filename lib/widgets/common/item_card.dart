@@ -16,7 +16,8 @@ class ItemCard extends StatelessWidget {
   final ProductModel? product;
   final TogetherModel? together;
 
-  /// type == null ? Loading state
+  /// type == null -> Loading state \
+  /// type != null -> Corresponded model required
   final EChatItemType? type;
 
   const ItemCard({

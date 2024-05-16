@@ -31,6 +31,5 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
-    - lib/repositories/ # TODO: delete after connect api
   errors:
     invalid_annotation_target: ignore
