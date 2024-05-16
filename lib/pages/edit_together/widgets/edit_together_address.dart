@@ -105,14 +105,14 @@ class _EditTogetherAddressState extends State<EditTogetherAddress> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: Sizes.size1,
-                    color: Colors.black54,
+                    color: Colors.grey.shade200,
                   ),
                   borderRadius: BorderRadius.circular(Sizes.size5),
                 ),
                 child: BlocBuilder<EditTogetherBloc, EditTogetherState>(
                   builder: (context, state) => AppFont(
                     state.together.address ?? '도로명 주소를 검색해주세요.',
-                    fontSize: Sizes.size16,
+                    fontSize: Sizes.size14,
                   ),
                 ),
               ),

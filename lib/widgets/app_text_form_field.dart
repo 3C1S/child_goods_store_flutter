@@ -70,9 +70,15 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       onChanged: _onChange,
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Theme.of(context).primaryColor,
+            width: Sizes.size2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey.shade200,
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(
@@ -81,6 +87,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         ),
         hintText: widget.hintText,
         suffix: widget.suffixText != null ? AppFont(widget.suffixText!) : null,
+      ),
+      style: const TextStyle(
+        fontSize: Sizes.size14,
       ),
       textAlign: widget.suffixText != null ? TextAlign.right : TextAlign.left,
       obscureText: widget.obscureText,
