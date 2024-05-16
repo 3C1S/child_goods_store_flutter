@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/GA/ga_route_observer.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
+import 'package:child_goods_store_flutter/blocs/chat/chat_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
@@ -54,6 +55,7 @@ import 'package:child_goods_store_flutter/pages/splash/splash_page.dart';
 import 'package:child_goods_store_flutter/pages/together/together_page.dart';
 import 'package:child_goods_store_flutter/pages/together_detail/together_detail_page.dart';
 import 'package:child_goods_store_flutter/repositories/interface/auth_repository_interfece.dart';
+import 'package:child_goods_store_flutter/repositories/interface/chat_repository_interface.dart';
 import 'package:child_goods_store_flutter/repositories/interface/child_repository_interface.dart';
 import 'package:child_goods_store_flutter/repositories/interface/data_repository_interface.dart';
 import 'package:child_goods_store_flutter/repositories/interface/image_repository_interface.dart';
@@ -326,7 +328,12 @@ class _AppRouterState extends State<AppRouter> {
                 GoRoute(
                   name: Routes.chat,
                   path: Routes.chat,
-                  builder: (context, state) => const ChatPage(),
+                  builder: (context, state) => BlocProvider(
+                    create: (context) => ChatBloc(
+                      chatRepository: context.read<IChatRepository>(),
+                    ),
+                    child: const ChatPage(),
+                  ),
                 ),
               ],
             ),

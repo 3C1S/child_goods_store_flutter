@@ -4,6 +4,7 @@ import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/chat_repository_interface.dart';
+import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 
 class ChatRepositoryImplDev implements IChatRepository {
   ///
@@ -15,27 +16,29 @@ class ChatRepositoryImplDev implements IChatRepository {
     var resTmp = ResModel<List<ChatRoomModel>>(
       code: 1000,
       data: [
-        ChatRoomModel(
-          chatRoomId: 1,
-          category: EChatItemType.product,
-          id: 1,
-          productName: 'Example product',
-          participantsNum: 2,
-          price: 10000,
-          createdAt: DateTime.now(),
-        ),
-        ChatRoomModel(
-          chatRoomId: 2,
-          category: EChatItemType.together,
-          id: 1,
-          productName: 'Example together',
-          participantsNum: 5,
-          price: 100000,
-          unitPrice: 2000,
-          endDate: DateTime.now().add(const Duration(days: 10)),
-          message: '안녕하세요!',
-          createdAt: DateTime.now(),
-        ),
+        for (int i = 0; i < 10; i++) ...[
+          ChatRoomModel(
+            chatRoomId: 2 * i + 1,
+            category: EChatItemType.product,
+            id: 2 * i + 1,
+            productName: 'Example product',
+            participantsNum: 2,
+            price: 10000,
+            createdAt: DateTime.now(),
+          ),
+          ChatRoomModel(
+            chatRoomId: 2 * i + 2,
+            category: EChatItemType.together,
+            id: 2 * i + 1,
+            productName: 'Example together',
+            participantsNum: 5,
+            price: 100000,
+            unitPrice: 2000,
+            endDate: DateTime.now().add(const Duration(days: 10)),
+            message: '안녕하세요!',
+            createdAt: DateTime.now(),
+          ),
+        ],
       ],
     ).toJson(
       (chatRooms) => chatRooms.map((chatRoom) => chatRoom.toJson()).toList(),

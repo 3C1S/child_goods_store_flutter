@@ -13,41 +13,20 @@ class TagContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Sizes.size28,
-      margin: const EdgeInsets.only(right: Sizes.size5),
+    return Padding(
       padding: const EdgeInsets.only(right: Sizes.size10),
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Sizes.size20),
-        color: Theme.of(context).scaffoldBackgroundColor,
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).primaryColor.withOpacity(0.5),
-            blurRadius: Sizes.size1,
-            spreadRadius: Sizes.size1 / 3,
-          ),
-        ],
-      ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            color: Theme.of(context).primaryColor.withOpacity(0.5),
-            height: Sizes.size28,
-            padding: const EdgeInsets.only(
-              left: Sizes.size7,
-              right: Sizes.size5,
-            ),
-            child: const Center(
-              child: AppFont(
-                '#',
-                fontWeight: FontWeight.w900,
-                fontSize: Sizes.size18,
-                color: Colors.white,
-              ),
+          Center(
+            child: AppFont(
+              '#',
+              fontWeight: FontWeight.w900,
+              fontSize: Sizes.size18,
+              color: Theme.of(context).primaryColor,
             ),
           ),
-          Gaps.h5,
+          Gaps.h3,
           AppFont(tag),
         ],
       ),
