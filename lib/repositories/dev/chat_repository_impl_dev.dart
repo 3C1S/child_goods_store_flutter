@@ -82,7 +82,7 @@ class ChatRepositoryImplDev implements IChatRepository {
               ),
             ),
         ],
-      ].reversed.toList(),
+      ],
     ).toJson(
       (chatRooms) => chatRooms.map((chatRoom) => chatRoom.toJson()).toList(),
     );

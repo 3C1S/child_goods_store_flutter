@@ -20,11 +20,14 @@ class ItemCard extends StatelessWidget {
   /// type != null -> Corresponded model required
   final EChatItemType? type;
 
+  final bool isLarge;
+
   const ItemCard({
     super.key,
     this.product,
     this.together,
     this.type,
+    this.isLarge = true,
   }) : assert(type == null ||
             (type == EChatItemType.product && product != null) ||
             (type == EChatItemType.together && together != null));
@@ -41,10 +44,14 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppInkButton(
-      borderRadSize: 0,
-      padding: EdgeInsets.zero,
+      borderRadSize: isLarge ? 0 : Sizes.size12,
+      padding: isLarge
+          ? EdgeInsets.zero
+          : const EdgeInsets.only(
+              left: Sizes.size5,
+            ),
       onTap: () => _onTap(context),
-      color: Colors.black12,
+      color: isLarge ? Colors.black12 : Colors.transparent,
       shadowColor: Colors.transparent,
       child: SizedBox(
         height: Sizes.size80,
@@ -66,9 +73,13 @@ class ItemCard extends StatelessWidget {
   Widget _buildProduct(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: Sizes.size80,
-          height: Sizes.size80,
+        Container(
+          width: isLarge ? Sizes.size80 : Sizes.size48,
+          height: isLarge ? Sizes.size80 : Sizes.size48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(isLarge ? 0 : Sizes.size10),
+          ),
+          clipBehavior: Clip.hardEdge,
           child: AppNetworkImage(
             profileImg: product?.productImage.first,
           ),
@@ -79,8 +90,14 @@ class ItemCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              AppFont(product?.productName ?? Strings.nullStr),
-              AppFont('${product?.price?.price() ?? "-"}원'),
+              AppFont(
+                product?.productName ?? Strings.nullStr,
+                fontSize: isLarge ? Sizes.size14 : Sizes.size10,
+              ),
+              AppFont(
+                '${product?.price?.price() ?? "-"}원',
+                fontSize: isLarge ? Sizes.size14 : Sizes.size10,
+              ),
             ],
           ),
         ),
@@ -94,9 +111,13 @@ class ItemCard extends StatelessWidget {
   Widget _buildTogether(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: Sizes.size80,
-          height: Sizes.size80,
+        Container(
+          width: isLarge ? Sizes.size80 : Sizes.size48,
+          height: isLarge ? Sizes.size80 : Sizes.size48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(isLarge ? 0 : Sizes.size10),
+          ),
+          clipBehavior: Clip.hardEdge,
           child: AppNetworkImage(
             profileImg: together?.togetherImage.first,
           ),
@@ -107,11 +128,19 @@ class ItemCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              AppFont(together?.togetherName ?? Strings.nullStr),
               AppFont(
-                  '${together?.totalPrice?.price() ?? "-"} (${together?.purchasePrice?.price() ?? "-"})원'),
-              AppFont(together?.deadline.toString().split(' ').first ??
-                  Strings.nullStr),
+                together?.togetherName ?? Strings.nullStr,
+                fontSize: isLarge ? Sizes.size14 : Sizes.size10,
+              ),
+              AppFont(
+                '${together?.totalPrice?.price() ?? "-"} (${together?.purchasePrice?.price() ?? "-"})원',
+                fontSize: isLarge ? Sizes.size14 : Sizes.size10,
+              ),
+              AppFont(
+                together?.deadline.toString().split(' ').first ??
+                    Strings.nullStr,
+                fontSize: isLarge ? Sizes.size14 : Sizes.size10,
+              ),
             ],
           ),
         ),

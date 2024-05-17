@@ -1,8 +1,10 @@
 import 'package:child_goods_store_flutter/blocs/chat/room/chat_room_event.dart';
 import 'package:child_goods_store_flutter/blocs/chat/room/chat_room_state.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
+import 'package:child_goods_store_flutter/models/chat/chat_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/chat_repository_interface.dart';
 import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
@@ -97,7 +99,53 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
   Future<void> _chatRoomGetChatsHandler(
     ChatRoomGetChats event,
     Emitter<ChatRoomState> emit,
-  ) async {}
+  ) async {
+    if (state.chatStatus == ELoadingStatus.loading) return;
+    emit(state.copyWith(
+      status: ELoadingStatus.loading,
+      chatStatus: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        var res = await chatRepository.getChattingDetail(
+          chatRoomId: chatRoomId,
+          page: state.page,
+        );
+
+        // End scroll
+        if (res.data?.isNotEmpty == false) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            chatStatus: ELoadingStatus.error,
+            message: Strings.endOfPage,
+          ));
+          return;
+        }
+
+        List<ChatModel> newList = [];
+        newList
+          ..addAll(state.chats)
+          ..addAll(res.data ?? []);
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          chatStatus: ELoadingStatus.loaded,
+          chats: newList,
+          page: state.page + 1,
+        ));
+      },
+      state: state,
+      emit: emit,
+      initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            chatStatus: ELoadingStatus.error,
+          ));
+        }
+      },
+    );
+  }
 
   Future<void> _chatRoomSendChatHandler(
     ChatRoomSendChat event,
