@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_model.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
+import 'package:child_goods_store_flutter/models/review/review_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/chat_repository_interface.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
@@ -29,7 +30,7 @@ class ChatRepositoryImplDev implements IChatRepository {
           ChatRoomModel(
             chatRoomId: 2 * i + 2,
             category: EChatItemType.together,
-            id: 2 * i + 1,
+            id: 2 * i + 2,
             productName: 'Example together',
             participantsNum: 5,
             price: 100000,
@@ -122,6 +123,34 @@ class ChatRepositoryImplDev implements IChatRepository {
     var res = ResModel<int>.fromJson(
       resTmp,
       (json) => json as int,
+    );
+
+    return res;
+  }
+
+  ///
+  /// API 305
+  @override
+  Future<ResModel<ReviewModel>> getItemByChatRoomId({
+    required int chatRoomId,
+  }) async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<ReviewModel>(
+      code: 1000,
+      data: ReviewModel(
+        id: chatRoomId,
+        type: chatRoomId % 2 == 1
+            ? EChatItemType.product
+            : EChatItemType.together,
+      ),
+    ).toJson(
+      (chatRoomId) => chatRoomId.toJson(),
+    );
+
+    var res = ResModel<ReviewModel>.fromJson(
+      resTmp,
+      (json) => ReviewModel.fromJson(json),
     );
 
     return res;

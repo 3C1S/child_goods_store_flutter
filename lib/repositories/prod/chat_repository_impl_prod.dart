@@ -3,6 +3,7 @@ import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_model.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
+import 'package:child_goods_store_flutter/models/review/review_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/chat_repository_interface.dart';
 import 'package:dio/dio.dart';
@@ -151,5 +152,20 @@ class ChatRepositoryImplProd implements IChatRepository {
     );
 
     return res;
+  }
+
+  ///
+  /// API 305
+  @override
+  Future<ResModel<ReviewModel>> getItemByChatRoomId({
+    required int chatRoomId,
+  }) async {
+    return ResModel<ReviewModel>(
+      code: 1000,
+      data: ReviewModel(
+        id: 1,
+        type: EChatItemType.product,
+      ),
+    );
   }
 }

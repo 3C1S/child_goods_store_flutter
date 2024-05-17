@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_model.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
+import 'package:child_goods_store_flutter/models/review/review_model.dart';
 
 abstract interface class IChatRepository {
   ///
@@ -23,9 +24,17 @@ abstract interface class IChatRepository {
   //   required String message,
   // });
 
+  ///
   /// API 304
   Future<ResModel<int>> postChattingRoom({
     required int id,
     required EChatItemType category,
+  });
+
+  ///
+  /// API 305
+  /// TODO: 아직 API 시트에 기재되지 않음
+  Future<ResModel<ReviewModel>> getItemByChatRoomId({
+    required int chatRoomId,
   });
 }

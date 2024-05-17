@@ -1,6 +1,7 @@
 import 'package:child_goods_store_flutter/GA/ga_route_observer.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/chat/list/chat_list_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/chat/room/chat_room_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
@@ -34,6 +35,7 @@ import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/models/review/review_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_model.dart';
 import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
+import 'package:child_goods_store_flutter/pages/chat_room/chat_room_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_address/edit_address_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
@@ -560,6 +562,25 @@ class _AppRouterState extends State<AppRouter> {
                 review: (state.extra as GoRouterExtraModel<ReviewModel>?)?.data,
               ),
               child: const EditReviewPage(),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: Routes.chatRoom,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': (state.extra as GoRouterExtraModel<int>).data ?? -1
+            },
+            child: BlocProvider(
+              create: (context) => ChatRoomBloc(
+                chatRepository: context.read<IChatRepository>(),
+                productRepository: context.read<IProductRepository>(),
+                togetherRepository: context.read<ITogetherRepository>(),
+                chatRoomId: (state.extra as GoRouterExtraModel<int>).data ?? -1,
+              ),
+              child: const ChatRoomPage(),
             ),
           ),
         ),

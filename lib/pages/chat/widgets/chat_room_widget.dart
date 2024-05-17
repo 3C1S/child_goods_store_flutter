@@ -1,12 +1,15 @@
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
+import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/utils/time_utils.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatRoomWidget extends StatelessWidget {
   final ChatRoomModel chatRoom;
@@ -16,11 +19,19 @@ class ChatRoomWidget extends StatelessWidget {
     required this.chatRoom,
   });
 
+  void _onTapChatRoom(BuildContext context) {
+    context.push(
+      Routes.chatRoom,
+      extra: GoRouterExtraModel<int>(data: chatRoom.id),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: Sizes.size80,
       child: AppInkButton(
+        onTap: () => _onTapChatRoom(context),
         borderRadSize: 0,
         color: Colors.transparent,
         shadowColor: Colors.transparent,
