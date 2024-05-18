@@ -29,6 +29,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
     on<ChatRoomGetChats>(_chatRoomGetChatsHandler);
     on<ChatRoomSendChat>(_chatRoomSendChatHandler);
 
+    add(ChatRoomGetItem());
     add(ChatRoomGetChats());
   }
 
@@ -60,25 +61,23 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
             var res = await productRepository.getProduct(
               productId: id!,
             );
-
             emit(state.copyWith(
               status: ELoadingStatus.loaded,
               targetStatus: ELoadingStatus.loaded,
               targetProduct: res.data,
             ));
-
+            syncState(state);
             break;
           case EChatItemType.together:
             var res = await togetherRepository.getTogether(
               togetherId: id!,
             );
-
             emit(state.copyWith(
               status: ELoadingStatus.loaded,
               targetStatus: ELoadingStatus.loaded,
               targetTogether: res.data,
             ));
-
+            syncState(state);
             break;
         }
 
@@ -95,6 +94,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
             targetStatus: ELoadingStatus.error,
             targetErrMessage: state.message,
           ));
+          syncState(state);
         }
       },
     );
@@ -104,8 +104,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
     ChatRoomGetChats event,
     Emitter<ChatRoomState> emit,
   ) async {
-    if (state.chatStatus == ELoadingStatus.loading ||
-        state.status == ELoadingStatus.loading) return;
+    if (state.chatStatus == ELoadingStatus.loading) return;
     emit(state.copyWith(
       status: ELoadingStatus.loading,
       chatStatus: ELoadingStatus.loading,
@@ -138,6 +137,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
           chats: newList,
           page: state.page + 1,
         ));
+        syncState(state);
       },
       state: state,
       emit: emit,
@@ -148,12 +148,10 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
             chatStatus: ELoadingStatus.error,
             chatErrMessage: state.message,
           ));
+          syncState(state);
         }
       },
     );
-    if (state.targetStatus == ELoadingStatus.init) {
-      add(ChatRoomGetItem());
-    }
   }
 
   Future<void> _chatRoomSendChatHandler(

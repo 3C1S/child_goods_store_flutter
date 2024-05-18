@@ -174,7 +174,16 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           padding: EdgeInsets.only(
             bottom: MediaQuery.paddingOf(context).bottom,
           ),
-          child: const ChatSendBox(),
+          child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
+            buildWhen: (previous, current) =>
+                previous.targetStatus != current.targetStatus,
+            builder: (context, state) {
+              if (state.targetStatus != ELoadingStatus.loaded) {
+                return const SizedBox();
+              }
+              return const ChatSendBox();
+            },
+          ),
         ),
       ),
     );
