@@ -5,9 +5,10 @@ import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
-import 'package:child_goods_store_flutter/utils/time_utils.dart';
+import 'package:child_goods_store_flutter/pages/chat_room/widgets/chat_box.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
+import 'package:child_goods_store_flutter/widgets/app_text_form_field.dart';
 import 'package:child_goods_store_flutter/widgets/common/item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,7 +110,24 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   ),
                 );
               }
-              return _buildBody(state);
+              return SliverPadding(
+                padding: const EdgeInsets.only(
+                  bottom: Sizes.size80,
+                  right: Sizes.size10,
+                  left: Sizes.size10,
+                ),
+                sliver: SliverList.separated(
+                  itemBuilder: (context, index) => SizedBox(
+                    width: double.infinity,
+                    child: ChatBox(
+                      chats: state.chats,
+                      index: index,
+                    ),
+                  ),
+                  separatorBuilder: (context, index) => Gaps.v5,
+                  itemCount: state.chats.length,
+                ),
+              );
             },
           ),
           // Loading indicator
@@ -139,21 +157,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildBody(ChatRoomState state) {
-    return SliverList.builder(
-      itemBuilder: (context, index) => Row(
-        children: [
-          AppFont('${state.chats[index].user?.userId} >>'),
-          Gaps.h10,
-          AppFont(state.chats[index].message ?? Strings.nullStr),
-          Gaps.h10,
-          AppFont(timeDiff(state.chats[index].createdAt)),
-        ],
-      ),
-      itemCount: state.chats.length,
+      bottomSheet: const AppTextFormField(),
     );
   }
 

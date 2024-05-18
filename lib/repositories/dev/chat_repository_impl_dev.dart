@@ -74,9 +74,12 @@ class ChatRepositoryImplDev implements IChatRepository {
               user: UserProfileModel(
                 userId: id,
                 nickName: 'User $id',
+                profileImg: id % 4 == 0
+                    ? null
+                    : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
               ),
               message: "message ${page * 100 + id * 10 + chat}",
-              isLeader: id == 1 ? true : false,
+              isLeader: id == 2 ? true : false,
               createdAt: DateTime.now().subtract(
                 Duration(seconds: (page * 100 + id * 10 + chat) * 10),
               ),
