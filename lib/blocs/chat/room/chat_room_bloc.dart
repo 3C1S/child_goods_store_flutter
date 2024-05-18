@@ -106,7 +106,6 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
   ) async {
     if (state.chatStatus == ELoadingStatus.loading ||
         state.status == ELoadingStatus.loading) return;
-    print('asd');
     emit(state.copyWith(
       status: ELoadingStatus.loading,
       chatStatus: ELoadingStatus.loading,
@@ -160,5 +159,8 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
   Future<void> _chatRoomSendChatHandler(
     ChatRoomSendChat event,
     Emitter<ChatRoomState> emit,
-  ) async {}
+  ) async {
+    if (event.message == Strings.nullStr) return;
+    print('[Chat send] ${event.message}');
+  }
 }
