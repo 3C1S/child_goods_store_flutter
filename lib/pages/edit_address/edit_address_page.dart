@@ -135,14 +135,14 @@ class _EditAddressPageState extends State<EditAddressPage> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: Sizes.size1,
-                            color: Colors.black54,
+                            color: Colors.grey.shade200,
                           ),
                           borderRadius: BorderRadius.circular(Sizes.size5),
                         ),
                         child: BlocBuilder<EditAddressBloc, EditAddressState>(
                           builder: (context, state) => AppFont(
                             state.address.address ?? '도로명 주소를 검색해주세요.',
-                            fontSize: Sizes.size16,
+                            fontSize: Sizes.size14,
                           ),
                         ),
                       ),

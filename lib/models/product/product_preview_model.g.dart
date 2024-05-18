@@ -9,9 +9,9 @@ part of 'product_preview_model.dart';
 _$ProductPreviewModelImpl _$$ProductPreviewModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductPreviewModelImpl(
-      productId: json['productId'] as int?,
+      productId: (json['productId'] as num?)?.toInt(),
       productName: json['productName'] as String?,
-      price: json['price'] as int?,
+      price: (json['price'] as num?)?.toInt(),
       state: EProductSaleState.fromJson(json['state'] as String?),
       productImage: json['productImage'] as String?,
       productHeart: json['productHeart'] as bool?,

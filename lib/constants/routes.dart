@@ -7,13 +7,42 @@ class Routes {
 
   static const String settings = '/settings';
 
-  static const String editTag = '/edit_tag';
   static const String editProfile = '/edit_profile';
+
+  /// ### Extra - optional
+  /// extra: GoRouterExtraModel\<List\<String\>\>? \
+  /// List\<String\>: previous tag list
+  static const String editTag = '/edit_tag';
+
+  /// ### Extra - optional
+  /// extra: GoRouterExtraModel\<AddressModel\>? \
+  /// AddressModel: previous address data
   static const String editAddress = '/edit_address';
+
+  /// ### Extra - optional
+  /// extra: GoRouterExtraModel\<ProductModel\>? \
+  /// ProductModel: previous product data
   static const String editProduct = '/edit_product';
+
+  /// ### Extra - optional
+  /// extra: GoRouterExtraModel\<TogetherModel\>? \
+  /// TogetherModel: previous together data
   static const String editTogether = '/edit_together';
+
+  /// ### Extra - optional
+  /// extra: GoRouterExtraModel\<ChildModel\>? \
+  /// ChildModel: previous child data
   static const String editChild = '/edit_child';
+
+  /// ### Extra - optional
+  /// extra: GoRouterExtraModel\<ReviewModel\>? \
+  /// ReviewModel: previous review data
   static const String editReview = '/edit_review';
+
+  /// ### Extra - Required
+  /// extra: GoRouterExtraModel\<int\> \
+  /// int: [chatRoomId]
+  static const String chatRoom = '/chat_room';
 
   static const String home = '/home';
   static const String together = '/together';

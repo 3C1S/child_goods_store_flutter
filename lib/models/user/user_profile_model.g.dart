@@ -9,12 +9,12 @@ part of 'user_profile_model.dart';
 _$UserProfileModelImpl _$$UserProfileModelImplFromJson(
         Map<String, dynamic> json) =>
     _$UserProfileModelImpl(
-      userId: json['userId'] as int?,
+      userId: (json['userId'] as num?)?.toInt(),
       nickName: json['nickName'] as String?,
       introduce: json['introduce'] as String?,
       profileImg: json['profileImg'] as String?,
-      followNum: json['followNum'] as int?,
-      followingNum: json['followingNum'] as int?,
+      followNum: (json['followNum'] as num?)?.toInt(),
+      followingNum: (json['followingNum'] as num?)?.toInt(),
       isFollowed: json['isFollowed'] as bool?,
       averageStars: (json['averageStars'] as num?)?.toDouble(),
       createdAt: json['createdAt'] == null

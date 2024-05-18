@@ -8,13 +8,15 @@ class AppTextFormField extends StatefulWidget {
   final Function(String value)? onFieldSubmitted;
   final bool singleLine;
   final bool expanded;
-  final bool dynamicSize;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final TextInputType? keyboardType;
   final bool hasNext;
   final bool obscureText;
   final bool? enabled;
   final String? suffixText;
+  final Color? enableBorderColor;
+  final Color? focusBorderColor;
 
   const AppTextFormField({
     super.key,
@@ -23,13 +25,15 @@ class AppTextFormField extends StatefulWidget {
     this.onFieldSubmitted,
     this.singleLine = true,
     this.expanded = false,
-    this.dynamicSize = false,
     this.controller,
+    this.focusNode,
     this.keyboardType,
     this.hasNext = false,
     this.obscureText = false,
     this.enabled,
     this.suffixText,
+    this.enableBorderColor,
+    this.focusBorderColor,
   });
 
   @override
@@ -42,12 +46,14 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   @override
   void initState() {
     super.initState();
-    _focusNode = FocusNode();
+    _focusNode = widget.focusNode ?? FocusNode();
   }
 
   @override
   void dispose() {
-    _focusNode.dispose();
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
     super.dispose();
   }
 
@@ -56,7 +62,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   }
 
   void _unfocus() {
-    _focusNode.unfocus();
+    if (widget.focusNode == null) {
+      _focusNode.unfocus();
+    }
   }
 
   @override
@@ -70,9 +78,15 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       onChanged: _onChange,
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).primaryColor,
+            color: widget.focusBorderColor ?? Theme.of(context).primaryColor,
+            width: Sizes.size2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: widget.enableBorderColor ?? Colors.grey.shade200,
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(
@@ -81,6 +95,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         ),
         hintText: widget.hintText,
         suffix: widget.suffixText != null ? AppFont(widget.suffixText!) : null,
+      ),
+      style: const TextStyle(
+        fontSize: Sizes.size14,
       ),
       textAlign: widget.suffixText != null ? TextAlign.right : TextAlign.left,
       obscureText: widget.obscureText,

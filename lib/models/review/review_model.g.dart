@@ -8,15 +8,15 @@ part of 'review_model.dart';
 
 _$ReviewModelImpl _$$ReviewModelImplFromJson(Map<String, dynamic> json) =>
     _$ReviewModelImpl(
-      reviewId: json['reviewId'] as int?,
+      reviewId: (json['reviewId'] as num?)?.toInt(),
       type: EChatItemType.fromJson(json['type'] as String?),
-      id: json['id'] as int?,
-      userId: json['userId'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['userId'] as num?)?.toInt(),
       userImage: json['userImage'] as String?,
       userName: json['userName'] as String?,
       averageStars: (json['averageStars'] as num?)?.toDouble(),
-      totalReview: json['totalReview'] as int?,
-      score: json['score'] as int?,
+      totalReview: (json['totalReview'] as num?)?.toInt(),
+      score: (json['score'] as num?)?.toInt(),
       content: json['content'] as String?,
       createdAt: json['createdAt'] == null
           ? null

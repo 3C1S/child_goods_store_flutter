@@ -8,7 +8,7 @@ part of 'child_model.dart';
 
 _$ChildModelImpl _$$ChildModelImplFromJson(Map<String, dynamic> json) =>
     _$ChildModelImpl(
-      childId: json['childId'] as int?,
+      childId: (json['childId'] as num?)?.toInt(),
       name: json['name'] as String?,
       age: EChildAge.fromJson(json['age'] as String?),
       gender: EChildGender.fromJson(json['gender'] as String?),

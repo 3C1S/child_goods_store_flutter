@@ -8,14 +8,14 @@ part of 'together_model.dart';
 
 _$TogetherModelImpl _$$TogetherModelImplFromJson(Map<String, dynamic> json) =>
     _$TogetherModelImpl(
-      togetherId: json['togetherId'] as int?,
+      togetherId: (json['togetherId'] as num?)?.toInt(),
       user: json['user'] == null
           ? null
           : UserProfileModel.fromJson(json['user'] as Map<String, dynamic>),
       togetherName: json['togetherName'] as String?,
       details: json['details'] as String?,
-      totalPrice: json['totalPrice'] as int?,
-      purchasePrice: json['purchasePrice'] as int?,
+      totalPrice: (json['totalPrice'] as num?)?.toInt(),
+      purchasePrice: (json['purchasePrice'] as num?)?.toInt(),
       mainCategory: EMainCategory.fromJson(json['mainCategory'] as String?),
       subCategory: ESubCategory.fromJson(json['subCategory'] as String?),
       state: EProductSaleState.fromJson(json['state'] as String?),
@@ -26,8 +26,8 @@ _$TogetherModelImpl _$$TogetherModelImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['deadline'] as String),
       address: json['address'] as String?,
       detailAddress: json['detailAddress'] as String?,
-      totalNum: json['totalNum'] as int?,
-      purchaseNum: json['purchaseNum'] as int?,
+      totalNum: (json['totalNum'] as num?)?.toInt(),
+      purchaseNum: (json['purchaseNum'] as num?)?.toInt(),
       tag: (json['tag'] as List<dynamic>?)?.map((e) => e as String).toList() ??
           const [],
       togetherImage: (json['togetherImage'] as List<dynamic>?)

@@ -32,8 +32,8 @@ class AppDropdown extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).shadowColor.withOpacity(0.1),
-            blurRadius: Sizes.size3,
+            color: Colors.grey.shade200,
+            blurRadius: Sizes.size1,
             spreadRadius: Sizes.size1,
           ),
         ],
@@ -47,7 +47,7 @@ class AppDropdown extends StatelessWidget {
           value: _valueCheck(),
           menuMaxHeight: 300,
           style: const TextStyle(
-            fontSize: Sizes.size14,
+            fontSize: Sizes.size12,
             color: Colors.black,
           ),
           hint: AppFont(hint),

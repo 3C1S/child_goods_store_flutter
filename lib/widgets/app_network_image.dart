@@ -25,30 +25,8 @@ class AppNetworkImage extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: profileImg == null || profileImg == Strings.nullStr
           ? Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.image_not_supported_rounded,
-                    size: Sizes.size40,
-                    color: Colors.black87.withOpacity(0.5),
-                  ),
-                  Gaps.v10,
-                  AppFont(
-                    '제공되는 이미지가\n없습니다 :(',
-                    textAlign: TextAlign.center,
-                    fontSize: Sizes.size10,
-                    color: Colors.black87.withOpacity(0.5),
-                  ),
-                ],
-              ),
-            )
-          : Image.network(
-              profileImg!,
-              fit: BoxFit.cover,
-              width: width,
-              height: height,
-              errorBuilder: (context, error, stackTrace) => Center(
+              child: SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -65,6 +43,34 @@ class AppNetworkImage extends StatelessWidget {
                       color: Colors.black87.withOpacity(0.5),
                     ),
                   ],
+                ),
+              ),
+            )
+          : Image.network(
+              profileImg!,
+              fit: BoxFit.cover,
+              width: width,
+              height: height,
+              errorBuilder: (context, error, stackTrace) => Center(
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.image_not_supported_rounded,
+                        size: Sizes.size40,
+                        color: Colors.black87.withOpacity(0.5),
+                      ),
+                      Gaps.v10,
+                      AppFont(
+                        '제공되는 이미지가\n없습니다 :(',
+                        textAlign: TextAlign.center,
+                        fontSize: Sizes.size10,
+                        color: Colors.black87.withOpacity(0.5),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
