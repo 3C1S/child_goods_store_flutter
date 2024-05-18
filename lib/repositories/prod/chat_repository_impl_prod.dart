@@ -160,12 +160,30 @@ class ChatRepositoryImplProd implements IChatRepository {
   Future<ResModel<ReviewModel>> getItemByChatRoomId({
     required int chatRoomId,
   }) async {
-    return ResModel<ReviewModel>(
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // var res = await dio.get('/chatting/$chatRoomId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<ReviewModel>(
       code: 1000,
       data: ReviewModel(
-        id: 1,
-        type: EChatItemType.product,
+        id: chatRoomId,
+        type: chatRoomId % 2 == 1
+            ? EChatItemType.product
+            : EChatItemType.together,
       ),
+    ).toJson(
+      (chatRoomId) => chatRoomId.toJson(),
     );
+
+    var res = ResModel<ReviewModel>.fromJson(
+      resTmp,
+      (json) => ReviewModel.fromJson(json),
+    );
+
+    return res;
   }
 }

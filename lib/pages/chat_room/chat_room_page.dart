@@ -104,7 +104,8 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
               if (state.targetStatus == ELoadingStatus.error) {
                 return SliverFillRemaining(
                   child: _buildError(
-                    message: state.message ?? Strings.unknownFail,
+                    message: state.targetErrMessage ?? Strings.unknownFail,
+                    onRetry: _onTapRetryGetItem,
                   ),
                 );
               }
@@ -113,31 +114,27 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           ),
           // Loading indicator
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: Sizes.size20),
-              child: Center(
-                child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
-                  builder: (context, state) {
-                    if (state.chatStatus == ELoadingStatus.error) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          AppFont(state.message ?? Strings.unknownFail),
-                          Gaps.v20,
-                          AppInkButton(
-                            onTap: () => _getChats(force: true),
-                            child: const AppFont(
-                              '재시도',
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                ),
-              ),
+            child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
+              builder: (context, state) {
+                if (state.targetStatus == ELoadingStatus.error) {
+                  return const SizedBox();
+                }
+                if (state.chatStatus == ELoadingStatus.error) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: Sizes.size20),
+                    child: _buildError(
+                      message: state.chatErrMessage ?? Strings.unknownFail,
+                      onRetry: () => _getChats(force: true),
+                    ),
+                  );
+                }
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: Sizes.size20),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -162,6 +159,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
   Widget _buildError({
     required String message,
+    required Function() onRetry,
   }) {
     return Center(
       child: Column(
@@ -170,7 +168,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           AppFont(message),
           Gaps.v20,
           AppInkButton(
-            onTap: _onTapRetryGetItem,
+            onTap: onRetry,
             child: const AppFont(
               '재시도',
               color: Colors.white,

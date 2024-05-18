@@ -8,17 +8,21 @@ class ChatRoomState extends BlocState {
   final int page; // TODO: page보다 불러온 채팅 중 가장 오래된 채팅으로 대체해야 할 듯.
   final List<ChatModel> chats;
   final ELoadingStatus chatStatus;
+  final String? chatErrMessage;
   final ProductModel? targetProduct;
   final TogetherModel? targetTogether;
   final ELoadingStatus targetStatus;
+  final String? targetErrMessage;
 
   const ChatRoomState({
     required this.page,
     required this.chats,
     required this.chatStatus,
+    this.chatErrMessage,
     this.targetProduct,
     this.targetTogether,
     required this.targetStatus,
+    this.targetErrMessage,
     required super.status,
     super.message,
   });
@@ -27,9 +31,11 @@ class ChatRoomState extends BlocState {
       : page = 0,
         chats = const [],
         chatStatus = ELoadingStatus.init,
+        chatErrMessage = null,
         targetProduct = null,
         targetTogether = null,
         targetStatus = ELoadingStatus.init,
+        targetErrMessage = null,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -42,17 +48,21 @@ class ChatRoomState extends BlocState {
     int? page,
     List<ChatModel>? chats,
     ELoadingStatus? chatStatus,
+    String? chatErrMessage,
     ProductModel? targetProduct,
     TogetherModel? targetTogether,
     ELoadingStatus? targetStatus,
+    String? targetErrMessage,
   }) =>
       ChatRoomState(
         page: page ?? this.page,
         chats: chats ?? this.chats,
         chatStatus: chatStatus ?? this.chatStatus,
+        chatErrMessage: chatErrMessage ?? this.chatErrMessage,
         targetProduct: targetProduct ?? this.targetProduct,
         targetTogether: targetTogether ?? this.targetTogether,
         targetStatus: targetStatus ?? this.targetStatus,
+        targetErrMessage: targetErrMessage ?? this.targetErrMessage,
         status: status ?? this.status,
         message: message ?? this.message,
       );
@@ -62,9 +72,11 @@ class ChatRoomState extends BlocState {
         page,
         chats,
         chatStatus,
+        chatErrMessage,
         targetProduct,
         targetTogether,
         targetStatus,
+        targetErrMessage,
         status,
         message,
       ];

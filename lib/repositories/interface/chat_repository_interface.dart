@@ -33,7 +33,6 @@ abstract interface class IChatRepository {
 
   ///
   /// API 305
-  /// TODO: 아직 API 시트에 기재되지 않음
   Future<ResModel<ReviewModel>> getItemByChatRoomId({
     required int chatRoomId,
   });

@@ -29,7 +29,6 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
     on<ChatRoomGetChats>(_chatRoomGetChatsHandler);
     on<ChatRoomSendChat>(_chatRoomSendChatHandler);
 
-    add(ChatRoomGetItem());
     add(ChatRoomGetChats());
   }
 
@@ -82,6 +81,10 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
 
             break;
         }
+
+        if (state.chatStatus == ELoadingStatus.error) {
+          add(ChatRoomGetChats());
+        }
       },
       state: state,
       emit: emit,
@@ -90,6 +93,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
         if (state.status == ELoadingStatus.error) {
           emit(state.copyWith(
             targetStatus: ELoadingStatus.error,
+            targetErrMessage: state.message,
           ));
         }
       },
@@ -100,7 +104,9 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
     ChatRoomGetChats event,
     Emitter<ChatRoomState> emit,
   ) async {
-    if (state.chatStatus == ELoadingStatus.loading) return;
+    if (state.chatStatus == ELoadingStatus.loading ||
+        state.status == ELoadingStatus.loading) return;
+    print('asd');
     emit(state.copyWith(
       status: ELoadingStatus.loading,
       chatStatus: ELoadingStatus.loading,
@@ -141,10 +147,14 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
         if (state.status == ELoadingStatus.error) {
           emit(state.copyWith(
             chatStatus: ELoadingStatus.error,
+            chatErrMessage: state.message,
           ));
         }
       },
     );
+    if (state.targetStatus == ELoadingStatus.init) {
+      add(ChatRoomGetItem());
+    }
   }
 
   Future<void> _chatRoomSendChatHandler(
