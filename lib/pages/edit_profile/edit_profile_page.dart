@@ -104,7 +104,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         }
         if (state.status == ELoadingStatus.loaded) {
           if (context.read<EditProfileBloc>().httpMethod == EHttpMethod.post) {
-            context.pushReplacement(Routes.home);
+            context.go(Routes.product);
           } else {
             context.pop();
           }

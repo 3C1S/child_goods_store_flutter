@@ -8,7 +8,7 @@ import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
-import 'package:child_goods_store_flutter/pages/home/widgets/home_app_bar.dart';
+import 'package:child_goods_store_flutter/pages/product/widgets/product_app_bar.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
@@ -17,14 +17,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ProductPage extends StatefulWidget {
+  const ProductPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ProductPage> createState() => _ProductPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ProductPageState extends State<ProductPage> {
   late ScrollController _scrollController;
 
   @override
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
         controller: _scrollController,
         slivers: [
           const SliverAppBar(
-            flexibleSpace: HomeAppBar(),
+            flexibleSpace: ProductAppBar(),
             collapsedHeight: 210,
             floating: true,
             snap: true,

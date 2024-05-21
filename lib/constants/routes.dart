@@ -39,12 +39,7 @@ class Routes {
   /// ReviewModel: previous review data
   static const String editReview = '/edit_review';
 
-  /// ### Extra - Required
-  /// extra: GoRouterExtraModel\<int\> \
-  /// int: [chatRoomId]
-  static const String chatRoom = '/chat_room';
-
-  static const String home = '/home';
+  static const String product = '/product';
   static const String together = '/together';
   static const String child = '/child';
   static const String chat = '/chat';
@@ -59,4 +54,9 @@ class Routes {
 class SubRoutes {
   static const String ship = 'ship';
   static const String notification = 'notification';
+
+  /// ### Extra - Required
+  /// extra: GoRouterExtraModel\<int\> \
+  /// int: [chatRoomId]
+  static const String chatRoom = 'chat_room';
 }

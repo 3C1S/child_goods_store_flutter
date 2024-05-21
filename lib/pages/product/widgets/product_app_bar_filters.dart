@@ -12,14 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeAppBarFilters extends StatefulWidget {
-  const HomeAppBarFilters({super.key});
+class ProductAppBarFilters extends StatefulWidget {
+  const ProductAppBarFilters({super.key});
 
   @override
-  State<HomeAppBarFilters> createState() => _HomeAppBarFiltersState();
+  State<ProductAppBarFilters> createState() => ProductAppBarFiltersState();
 }
 
-class _HomeAppBarFiltersState extends State<HomeAppBarFilters> {
+class ProductAppBarFiltersState extends State<ProductAppBarFilters> {
   bool _noPriceFilter(ProductListState state) {
     return state.minPrice == ProductListState.MIN_PRICE &&
         state.maxPrice == ProductListState.MAX_PRICE;

@@ -20,8 +20,8 @@ class ChatRoomWidget extends StatelessWidget {
   });
 
   void _onTapChatRoom(BuildContext context) {
-    context.push(
-      Routes.chatRoom,
+    context.go(
+      '${Routes.chat}/${SubRoutes.chatRoom}',
       extra: GoRouterExtraModel<int>(data: chatRoom.id),
     );
   }
