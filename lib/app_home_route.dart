@@ -15,10 +15,6 @@ StatefulShellRoute _appHomeRoute() {
               message: state.body ?? Strings.unknownFail,
             );
           }
-          context.go(
-            '${Routes.chat}/${SubRoutes.chatRoom}',
-            extra: const GoRouterExtraModel<int>(data: 1),
-          );
         },
         child: Scaffold(
           body: navigationShell,
@@ -138,12 +134,12 @@ StatefulShellRoute _appHomeRoute() {
             ),
             routes: [
               GoRoute(
-                path: SubRoutes.chatRoom,
+                path: '${SubRoutes.chatRoom}/:chatRoomId',
                 pageBuilder: (context, state) => PageTransition.cupertino(
                   key: state.pageKey,
                   name: state.fullPath,
                   arguments: {
-                    'id': (state.extra as GoRouterExtraModel<int>).data ?? -1
+                    'id': int.parse(state.pathParameters['chatRoomId'] ?? '-1'),
                   },
                   child: BlocProvider(
                     create: (context) => ChatRoomBloc(
@@ -151,7 +147,7 @@ StatefulShellRoute _appHomeRoute() {
                       productRepository: context.read<IProductRepository>(),
                       togetherRepository: context.read<ITogetherRepository>(),
                       chatRoomId:
-                          (state.extra as GoRouterExtraModel<int>).data ?? -1,
+                          int.parse(state.pathParameters['chatRoomId'] ?? '-1'),
                     ),
                     child: const ChatRoomPage(),
                   ),

@@ -16,13 +16,25 @@ class FCMCubit extends Cubit<FCMState> {
     // at background
     FirebaseMessaging.onMessageOpenedApp.listen(listenFCM);
     // at terminate
-    FirebaseMessaging.instance.getInitialMessage().then(listenFCM);
+    FirebaseMessaging.instance.getInitialMessage().then((msg) => listenFCM(
+          msg,
+          afterReset: false,
+        ));
   }
 
-  void listenFCM(RemoteMessage? message) {
+  void listenFCM(
+    RemoteMessage? message, {
+    bool afterReset = true,
+  }) {
     if (message != null && fcmToken != Strings.nullStr) {
       emit(FCMState.fromRemoteMessage(message));
     }
+    if (afterReset) {
+      emit(const FCMState());
+    }
+  }
+
+  void resetFCM() {
     emit(const FCMState());
   }
 }

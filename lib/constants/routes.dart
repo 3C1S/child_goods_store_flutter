@@ -45,9 +45,19 @@ class Routes {
   static const String chat = '/chat';
   static const String profile = '/profile';
 
+  /// ### Path parameter - Required
+  /// `/:productId` [int]
   static const String productDetail = '/product';
+
+  /// ### Path parameter - Required
+  /// `/:togetherId` [int]
   static const String togetherDetail = '/together';
 
+  /// ### Path parameter - Required
+  /// `/:userId` [int]
+  ///
+  /// ### Query parameter - Required
+  /// `?mode=EFollowMode.key`
   static const String follow = '/follow';
 }
 
@@ -55,8 +65,7 @@ class SubRoutes {
   static const String ship = 'ship';
   static const String notification = 'notification';
 
-  /// ### Extra - Required
-  /// extra: GoRouterExtraModel\<int\> \
-  /// int: [chatRoomId]
+  /// ### Path parameter - Required
+  /// `/:chatRoomId` [int]
   static const String chatRoom = 'chat_room';
 }

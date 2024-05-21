@@ -90,6 +90,15 @@ class AppRouter extends StatefulWidget {
 class _AppRouterState extends State<AppRouter> {
   late GoRouter _routerConfig;
 
+  // App start route after splash
+  String _appStartRoute() {
+    if (FCMCubitSingleton.cubit.state.data?.code == 1000) {
+      FCMCubitSingleton.cubit.resetFCM();
+      return '${Routes.chat}/${SubRoutes.chatRoom}/1';
+    }
+    return Routes.product;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -126,7 +135,7 @@ class _AppRouterState extends State<AppRouter> {
         }
         if (authState.authStatus == EAuthStatus.authenticated) {
           return blockPageInAuthState.contains(state.uri.toString())
-              ? Routes.product
+              ? _appStartRoute()
               : state.uri.toString();
         }
         return state.uri.toString();
@@ -239,31 +248,30 @@ class _AppRouterState extends State<AppRouter> {
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['productId'] as String),
+              'id': int.parse(state.pathParameters['productId'] ?? '-1'),
             },
             child: BlocProvider(
               create: (context) => ProductDetailBloc(
                 productRepository: context.read<IProductRepository>(),
-                productId:
-                    int.parse(state.pathParameters['productId'] as String),
+                productId: int.parse(state.pathParameters['productId'] ?? '-1'),
               ),
               child: const ProductDetailPage(),
             ),
           ),
         ),
         GoRoute(
-          path: '${Routes.together}/:togetherId',
+          path: '${Routes.togetherDetail}/:togetherId',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['togetherId'] as String),
+              'id': int.parse(state.pathParameters['togetherId'] ?? '-1'),
             },
             child: BlocProvider(
               create: (context) => TogetherDetailBloc(
                 togetherRepository: context.read<ITogetherRepository>(),
                 togetherId:
-                    int.parse(state.pathParameters['togetherId'] as String),
+                    int.parse(state.pathParameters['togetherId'] ?? '-1'),
               ),
               child: const TogetherDetailPage(),
             ),
@@ -275,21 +283,21 @@ class _AppRouterState extends State<AppRouter> {
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['userId'] as String),
+              'id': int.parse(state.pathParameters['userId'] ?? '-1'),
             },
             child: MultiBlocProvider(
               providers: [
                 BlocProvider(
                   create: (context) => ProfileBloc(
                     userRepository: context.read<IUserRepository>(),
-                    userId: int.parse(state.pathParameters['userId'] as String),
+                    userId: int.parse(state.pathParameters['userId'] ?? '-1'),
                   ),
                 ),
                 BlocProvider(
                   create: (context) => ProfileTabBloc(
                     profileRepository: context.read<IProfileRepository>(),
                     reviewRepository: context.read<IReviewRepository>(),
-                    userId: int.parse(state.pathParameters['userId'] as String),
+                    userId: int.parse(state.pathParameters['userId'] ?? '-1'),
                   ),
                 ),
               ],
@@ -305,12 +313,12 @@ class _AppRouterState extends State<AppRouter> {
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['userId'] as String),
+              'id': int.parse(state.pathParameters['userId'] ?? '-1'),
             },
             child: BlocProvider(
               create: (context) => FollowBloc(
                 userRepository: context.read<IUserRepository>(),
-                userId: int.parse(state.pathParameters['userId'] as String),
+                userId: int.parse(state.pathParameters['userId'] ?? '-1'),
                 mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
               child: FollowPage(
