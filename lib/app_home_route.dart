@@ -17,13 +17,16 @@ StatefulShellRoute _appHomeRoute() {
           }
         },
         child: Scaffold(
-          body: navigationShell,
+          body: MediaQuery.removeViewPadding(
+            context: context,
+            child: navigationShell,
+          ),
           bottomNavigationBar: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeOut,
             height: state.uri.toString().contains(SubRoutes.chatRoom)
                 ? 0
-                : Sizes.size60 + MediaQuery.paddingOf(context).bottom,
+                : Sizes.size60 + MediaQuery.viewPaddingOf(context).bottom,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -37,7 +40,7 @@ StatefulShellRoute _appHomeRoute() {
             child: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
               child: SizedBox(
-                height: Sizes.size60 + MediaQuery.paddingOf(context).bottom,
+                height: Sizes.size60 + MediaQuery.viewPaddingOf(context).bottom,
                 child: BottomNavigationBar(
                   enableFeedback: false,
                   type: BottomNavigationBarType.fixed,

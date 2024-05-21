@@ -99,6 +99,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             },
           ),
         ),
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: CustomScrollView(
             controller: _scrollController,
@@ -169,11 +170,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             ],
           ),
         ),
-        bottomSheet: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.paddingOf(context).bottom,
-          ),
+        bottomSheet: SafeArea(
           child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
             buildWhen: (previous, current) =>
                 previous.targetStatus != current.targetStatus,

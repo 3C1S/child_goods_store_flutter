@@ -118,7 +118,7 @@ class _EditTagPageState extends State<EditTagPage> {
           width: double.infinity,
           height: Sizes.size60,
           margin: EdgeInsets.only(
-            bottom: MediaQuery.paddingOf(context).bottom,
+            bottom: MediaQuery.viewPaddingOf(context).bottom,
           ),
           child: const Center(
             child: AppFont(

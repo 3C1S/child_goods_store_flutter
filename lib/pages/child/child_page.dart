@@ -63,24 +63,22 @@ class _ChildPageState extends State<ChildPage> {
         title: const AppFont('자녀 맞춤추천'),
         elevation: Sizes.size1,
       ),
-      body: SafeArea(
-        child: BlocBuilder<ChildBloc, ChildState>(
-          builder: (context, state) {
-            if (state.childListStatus == ELoadingStatus.loaded) {
-              return _buildBody(context, state: state);
-            }
-            if (state.status == ELoadingStatus.error &&
-                state.childListStatus == ELoadingStatus.loading) {
-              return _buildError(
-                context,
-                message: state.message ?? Strings.unknownFail,
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
+      body: BlocBuilder<ChildBloc, ChildState>(
+        builder: (context, state) {
+          if (state.childListStatus == ELoadingStatus.loaded) {
+            return _buildBody(context, state: state);
+          }
+          if (state.status == ELoadingStatus.error &&
+              state.childListStatus == ELoadingStatus.loading) {
+            return _buildError(
+              context,
+              message: state.message ?? Strings.unknownFail,
             );
-          },
-        ),
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }

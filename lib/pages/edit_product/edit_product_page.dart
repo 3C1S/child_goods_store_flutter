@@ -158,7 +158,7 @@ class _EditProductPageState extends State<EditProductPage> {
                 width: double.infinity,
                 height: Sizes.size60,
                 margin: EdgeInsets.only(
-                  bottom: MediaQuery.paddingOf(context).bottom,
+                  bottom: MediaQuery.viewPaddingOf(context).bottom,
                 ),
                 child: Center(
                   child: state.status == ELoadingStatus.loading

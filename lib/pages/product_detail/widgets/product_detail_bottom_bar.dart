@@ -35,6 +35,7 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
   }) {
     AppBottomSheet.show(
       context,
+      applyBottomPadding: true,
       child: Material(
         child: Column(
           children: [
@@ -131,12 +132,14 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
       child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, state) {
           if (state.productStatus != ELoadingStatus.loaded) {
-            return const SizedBox();
+            return SizedBox(
+              height: MediaQuery.viewPaddingOf(context).bottom,
+            );
           }
           return Container(
-            height: Sizes.size60 + MediaQuery.paddingOf(context).bottom,
+            height: Sizes.size60 + MediaQuery.viewPaddingOf(context).bottom,
             padding: EdgeInsets.only(
-              bottom: MediaQuery.paddingOf(context).bottom,
+              bottom: MediaQuery.viewPaddingOf(context).bottom,
               left: Sizes.size20,
               right: Sizes.size20,
             ),
