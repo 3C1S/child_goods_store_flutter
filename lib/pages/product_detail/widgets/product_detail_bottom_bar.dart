@@ -114,7 +114,19 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
     }
   }
 
-  void _onTapChat() {}
+  void _onTapChat() {
+    var bloc = context.read<ProductDetailBloc>();
+    if (bloc.state.chatRoomIdResult == null) {
+      bloc.add(ProductDetailChat());
+    } else {
+      _goChatRoom();
+    }
+  }
+
+  void _goChatRoom() {
+    var chatRoomId = context.read<ProductDetailBloc>().state.chatRoomIdResult;
+    context.go('${Routes.chat}/${SubRoutes.chatRoom}/$chatRoomId');
+  }
 
   bool _iamSaler(ProductDetailState state) {
     return AuthBlocSingleton.bloc.state.user?.userId ==
@@ -129,7 +141,12 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
         productId:
             context.read<ProductDetailBloc>().state.productModel!.productId!,
       ),
-      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
+        listener: (context, state) {
+          if (state.chatStatus == ELoadingStatus.loaded) {
+            _goChatRoom();
+          }
+        },
         builder: (context, state) {
           if (state.productStatus != ELoadingStatus.loaded) {
             return SizedBox(

@@ -253,6 +253,7 @@ class _AppRouterState extends State<AppRouter> {
             child: BlocProvider(
               create: (context) => ProductDetailBloc(
                 productRepository: context.read<IProductRepository>(),
+                chatRepository: context.read<IChatRepository>(),
                 productId: int.parse(state.pathParameters['productId'] ?? '-1'),
               ),
               child: const ProductDetailPage(),

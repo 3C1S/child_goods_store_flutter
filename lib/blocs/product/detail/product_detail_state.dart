@@ -7,12 +7,16 @@ class ProductDetailState extends BlocState {
   final ELoadingStatus productStatus;
   final ELoadingStatus changeSaleStatus;
   final ELoadingStatus heartStatus;
+  final int? chatRoomIdResult;
+  final ELoadingStatus chatStatus;
 
   const ProductDetailState({
     this.productModel,
     required this.productStatus,
     required this.changeSaleStatus,
     required this.heartStatus,
+    this.chatRoomIdResult,
+    required this.chatStatus,
     required super.status,
     super.message,
   });
@@ -22,6 +26,8 @@ class ProductDetailState extends BlocState {
         productStatus = ELoadingStatus.init,
         changeSaleStatus = ELoadingStatus.init,
         heartStatus = ELoadingStatus.init,
+        chatRoomIdResult = null,
+        chatStatus = ELoadingStatus.init,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -35,6 +41,8 @@ class ProductDetailState extends BlocState {
     ELoadingStatus? productStatus,
     ELoadingStatus? changeSaleStatus,
     ELoadingStatus? heartStatus,
+    int? chatRoomIdResult,
+    ELoadingStatus? chatStatus,
   }) =>
       ProductDetailState(
         status: status ?? this.status,
@@ -43,6 +51,8 @@ class ProductDetailState extends BlocState {
         productStatus: productStatus ?? this.productStatus,
         changeSaleStatus: changeSaleStatus ?? this.changeSaleStatus,
         heartStatus: heartStatus ?? this.heartStatus,
+        chatRoomIdResult: chatRoomIdResult ?? this.chatRoomIdResult,
+        chatStatus: chatStatus ?? this.chatStatus,
       );
 
   @override
@@ -53,5 +63,7 @@ class ProductDetailState extends BlocState {
         productStatus,
         changeSaleStatus,
         heartStatus,
+        chatRoomIdResult,
+        chatStatus,
       ];
 }
