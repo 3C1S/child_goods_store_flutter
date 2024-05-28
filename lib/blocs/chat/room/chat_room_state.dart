@@ -13,6 +13,8 @@ class ChatRoomState extends BlocState {
   final TogetherModel? targetTogether;
   final ELoadingStatus targetStatus;
   final String? targetErrMessage;
+  final ELoadingStatus stompStatus;
+  final String? stompErrMessage;
 
   const ChatRoomState({
     required this.page,
@@ -23,6 +25,8 @@ class ChatRoomState extends BlocState {
     this.targetTogether,
     required this.targetStatus,
     this.targetErrMessage,
+    required this.stompStatus,
+    this.stompErrMessage,
     required super.status,
     super.message,
   });
@@ -36,6 +40,8 @@ class ChatRoomState extends BlocState {
         targetTogether = null,
         targetStatus = ELoadingStatus.init,
         targetErrMessage = null,
+        stompStatus = ELoadingStatus.init,
+        stompErrMessage = null,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -53,6 +59,8 @@ class ChatRoomState extends BlocState {
     TogetherModel? targetTogether,
     ELoadingStatus? targetStatus,
     String? targetErrMessage,
+    ELoadingStatus? stompStatus,
+    String? stompErrMessage,
   }) =>
       ChatRoomState(
         page: page ?? this.page,
@@ -63,6 +71,8 @@ class ChatRoomState extends BlocState {
         targetTogether: targetTogether ?? this.targetTogether,
         targetStatus: targetStatus ?? this.targetStatus,
         targetErrMessage: targetErrMessage ?? this.targetErrMessage,
+        stompStatus: stompStatus ?? this.stompStatus,
+        stompErrMessage: stompErrMessage ?? this.stompErrMessage,
         status: status ?? this.status,
         message: message ?? this.message,
       );
@@ -77,6 +87,8 @@ class ChatRoomState extends BlocState {
         targetTogether,
         targetStatus,
         targetErrMessage,
+        stompStatus,
+        stompErrMessage,
         status,
         message,
       ];

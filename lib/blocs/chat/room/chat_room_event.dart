@@ -9,3 +9,5 @@ class ChatRoomSendChat extends ChatRoomEvent {
 
   ChatRoomSendChat(this.message);
 }
+
+class ChatRoomInitStomp extends ChatRoomEvent {}

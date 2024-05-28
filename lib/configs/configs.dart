@@ -4,11 +4,16 @@ import 'package:child_goods_store_flutter/flavors.dart';
 class Configs {
   // Add configs here
   final String baseUrl;
+  final String wsUrl;
 
   // Initialize configs here
-  Configs._dev() : baseUrl = Networks.devBaseUrl;
+  Configs._dev()
+      : baseUrl = Networks.devBaseUrl,
+        wsUrl = Networks.devWsUrl;
 
-  Configs._prod() : baseUrl = Networks.baseUrl;
+  Configs._prod()
+      : baseUrl = Networks.baseUrl,
+        wsUrl = Networks.wsUrl;
 
   factory Configs(Flavor? flavor) {
     switch (flavor) {

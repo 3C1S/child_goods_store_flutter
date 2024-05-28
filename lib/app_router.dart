@@ -476,6 +476,7 @@ class _AppRouterState extends State<AppRouter> {
       debugShowCheckedModeBanner: false,
       title: F.title,
       theme: ThemeData(
+        platform: TargetPlatform.iOS,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white).copyWith(
           background: Colors.white,
         ),
