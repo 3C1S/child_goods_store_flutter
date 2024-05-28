@@ -122,5 +122,7 @@
     <string>육아</string>
     <key>naverServiceAppUrlScheme</key>
     <string>$(NAVER_SCHEME)</string>
+    <key>UIStatusBarHidden</key>
+    <false/>
   </dict>
 </plist>

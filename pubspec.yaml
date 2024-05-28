@@ -79,6 +79,7 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.7.1
   build_runner: ^2.4.8
+  flutter_native_splash: ^2.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -92,6 +93,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/images/
     - assets/svgs/
     - assets/jsons/
 
@@ -129,12 +131,12 @@ flavorizr:
         name: "DEV 육아"
       android:
         applicationId: "dev.io.github.u3C1S.child_goods_store_flutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "android/firebase/dev/google-services.json"
       ios:
         bundleId: "dev.io.github.u3C1S.childGoodsStoreFlutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "ios/firebase/dev/GoogleService-Info.plist"
 
@@ -143,11 +145,21 @@ flavorizr:
         name: "육아"
       android:
         applicationId: "io.github.u3C1S.child_goods_store_flutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "android/firebase/prod/google-services.json"
       ios:
         bundleId: "io.github.u3C1S.childGoodsStoreFlutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "ios/firebase/prod/GoogleService-Info.plist"
+
+# Native splash settings
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/child_goods_store_icon_1024.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/images/child_goods_store_icon_1024.png
+  android: true # Generate splash screen for Android
+  ios: true # Generate splash screen for iOS

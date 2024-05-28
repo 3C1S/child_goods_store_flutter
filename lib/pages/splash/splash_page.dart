@@ -42,6 +42,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0),
+      extendBodyBehindAppBar: true,
       body: Center(
         child: MultiBlocListener(
           listeners: [
@@ -97,12 +98,22 @@ class _SplashPageState extends State<SplashPage> {
                       Strings.unknownFail,
                 );
               }
-              return Column(
-                mainAxisSize: MainAxisSize.min,
+              return Stack(
+                alignment: Alignment.center,
                 children: [
-                  const CircularProgressIndicator(),
-                  Gaps.v10,
-                  AppFont(state.text),
+                  Image.asset(
+                    'assets/images/child_goods_store_icon_1024.png',
+                    width: MediaQuery.sizeOf(context).width * 0.66,
+                    height: MediaQuery.sizeOf(context).width * 0.66,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: MediaQuery.sizeOf(context).width * 0.66,
+                    ),
+                    child: SafeArea(
+                      child: AppFont(state.text),
+                    ),
+                  ),
                 ],
               );
             },
