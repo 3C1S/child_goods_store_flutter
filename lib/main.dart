@@ -22,13 +22,22 @@ import 'package:child_goods_store_flutter/app.dart';
 import 'package:child_goods_store_flutter/blocs/fcm/fcm_cubit_singleton.dart';
 import 'package:child_goods_store_flutter/configs/firebase_options.dart';
 import 'package:child_goods_store_flutter/GA/google_analytics.dart';
+import 'package:child_goods_store_flutter/constants/secret.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
+import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 FutureOr<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  KakaoSdk.init(
+      nativeAppKey: F.appFlavor == Flavor.prod
+          ? Secret.kakaoNativeAppKey
+          : Secret.kakaoNativeAppKeyDev);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -48,8 +57,6 @@ FutureOr<void> main() async {
 
   // Initialize FCMCubitSingleton
   await FCMCubitSingleton.initializer(fcmToken: fcmToken ?? Strings.nullStr);
-
-  FlutterNativeSplash.remove();
 
   runApp(const App());
 }
