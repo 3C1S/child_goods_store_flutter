@@ -11,6 +11,11 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # 1. Change `android/key.properties` - `flutter.versionName`, `flutter.versionCode`
 # 2. cd android
 # 3. fastlane beta
+#
+# [iOS] =======
+# 1. cd ios
+# 2. fastlane version - set version to pubspec.yaml's version
+# 3. fastlane beta
 version: 0.0.2+2
 
 environment:

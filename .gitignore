@@ -49,6 +49,10 @@ app.*.map.json
 android/pc-api-*
 android/fastlane/*
 !android/fastlane/Fastfile
+# Deploy secret - iOS
+ios/u3C1S_distribution.*
+ios/fastlane/*
+!ios/fastlane/Fastfile
 
 # Secret - Common
 lib/constants/secret.dart
