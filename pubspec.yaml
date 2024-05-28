@@ -64,6 +64,7 @@ dependencies:
   web_socket_channel: ^2.4.5
   stomp_dart_client: ^2.0.0
   flutter_advanced_switch: ^3.1.0
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -79,7 +80,6 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.7.1
   build_runner: ^2.4.8
-  flutter_native_splash: ^2.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
