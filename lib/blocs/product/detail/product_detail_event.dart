@@ -15,3 +15,5 @@ class ProductDetailChangeSaleState extends ProductDetailEvent {
 }
 
 class ProductDetailChangeHeart extends ProductDetailEvent {}
+
+class ProductDetailChat extends ProductDetailEvent {}

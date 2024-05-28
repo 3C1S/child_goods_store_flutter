@@ -1,3 +1,5 @@
+library child_goods_store_flutter_app_router;
+
 import 'package:child_goods_store_flutter/GA/ga_route_observer.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/chat/list/chat_list_bloc.dart';
@@ -45,8 +47,8 @@ import 'package:child_goods_store_flutter/pages/edit_review/edit_review_page.dar
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_together/edit_together_page.dart';
 import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
-import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/notification/notification_page.dart';
+import 'package:child_goods_store_flutter/pages/product/product_page.dart';
 import 'package:child_goods_store_flutter/pages/product_detail/product_detail_page.dart';
 import 'package:child_goods_store_flutter/pages/profile/profile_page.dart';
 import 'package:child_goods_store_flutter/pages/settings/settings_page.dart';
@@ -75,6 +77,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+/// Seperate [_appHomeRoute]
+part 'app_home_route.dart';
+
 class AppRouter extends StatefulWidget {
   const AppRouter({super.key});
 
@@ -84,6 +89,15 @@ class AppRouter extends StatefulWidget {
 
 class _AppRouterState extends State<AppRouter> {
   late GoRouter _routerConfig;
+
+  // App start route after splash
+  String _appStartRoute() {
+    if (FCMCubitSingleton.cubit.state.data?.code == 1000) {
+      FCMCubitSingleton.cubit.resetFCM();
+      return '${Routes.chat}/${SubRoutes.chatRoom}/1';
+    }
+    return Routes.product;
+  }
 
   @override
   void initState() {
@@ -121,7 +135,7 @@ class _AppRouterState extends State<AppRouter> {
         }
         if (authState.authStatus == EAuthStatus.authenticated) {
           return blockPageInAuthState.contains(state.uri.toString())
-              ? Routes.home
+              ? _appStartRoute()
               : state.uri.toString();
         }
         return state.uri.toString();
@@ -227,179 +241,38 @@ class _AppRouterState extends State<AppRouter> {
             ),
           ),
         ),
-        StatefulShellRoute.indexedStack(
-          pageBuilder: (context, state, navigationShell) =>
-              PageTransition.cupertino(
-            key: state.pageKey,
-            // ignore `name` field for disable GA
-            child: Scaffold(
-              body: navigationShell,
-              bottomNavigationBar: Container(
-                height: Sizes.size60 + MediaQuery.paddingOf(context).bottom,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: Sizes.size3,
-                      spreadRadius: Sizes.size1,
-                    ),
-                  ],
-                ),
-                child: BottomNavigationBar(
-                  enableFeedback: false,
-                  type: BottomNavigationBarType.fixed,
-                  unselectedLabelStyle: const TextStyle(fontSize: Sizes.size8),
-                  selectedLabelStyle: const TextStyle(fontSize: Sizes.size10),
-                  selectedIconTheme: const IconThemeData(size: Sizes.size28),
-                  items: [
-                    const BottomNavigationBarItem(
-                      label: '중고거래',
-                      icon: Icon(Icons.home),
-                    ),
-                    BottomNavigationBarItem(
-                      label: '공동구매',
-                      icon: Transform.scale(
-                        scale: 0.8,
-                        child: const Icon(FontAwesomeIcons.boxesStacked),
-                      ),
-                    ),
-                    const BottomNavigationBarItem(
-                      label: '자녀',
-                      icon: Icon(Icons.child_care_rounded),
-                    ),
-                    const BottomNavigationBarItem(
-                      label: '채팅',
-                      icon: Icon(Icons.chat_rounded),
-                    ),
-                    const BottomNavigationBarItem(
-                      label: '내 정보',
-                      icon: Icon(Icons.person_rounded),
-                    ),
-                  ],
-                  currentIndex: navigationShell.currentIndex,
-                  onTap: (value) => navigationShell.goBranch(value),
-                ),
-              ),
-            ),
-          ),
-          branches: [
-            StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  name: Routes.home,
-                  path: Routes.home,
-                  builder: (context, state) => BlocProvider(
-                    create: (context) => ProductListBloc(
-                      productRepository: context.read<IProductRepository>(),
-                    ),
-                    child: const HomePage(),
-                  ),
-                ),
-              ],
-            ),
-            StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  name: Routes.together,
-                  path: Routes.together,
-                  builder: (context, state) => BlocProvider(
-                    create: (context) => TogetherListBloc(
-                      togetherRepository: context.read<ITogetherRepository>(),
-                    ),
-                    child: const TogetherPage(),
-                  ),
-                ),
-              ],
-            ),
-            StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  name: Routes.child,
-                  path: Routes.child,
-                  builder: (context, state) => BlocProvider(
-                    create: (context) => ChildBloc(
-                      childRepository: context.read<IChildRepository>(),
-                    ),
-                    child: const ChildPage(),
-                  ),
-                ),
-              ],
-            ),
-            StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  name: Routes.chat,
-                  path: Routes.chat,
-                  builder: (context, state) => BlocProvider(
-                    create: (context) => ChatListBloc(
-                      chatRepository: context.read<IChatRepository>(),
-                    ),
-                    child: const ChatPage(),
-                  ),
-                ),
-              ],
-            ),
-            StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  name: Routes.profile,
-                  path: Routes.profile,
-                  builder: (context, state) => MultiBlocProvider(
-                    providers: [
-                      BlocProvider(
-                        create: (context) => ProfileBloc(
-                          userRepository: context.read<IUserRepository>(),
-                          userId: AuthBlocSingleton.bloc.state.user!.userId!,
-                        ),
-                      ),
-                      BlocProvider(
-                        create: (context) => ProfileTabBloc(
-                          profileRepository: context.read<IProfileRepository>(),
-                          reviewRepository: context.read<IReviewRepository>(),
-                          userId: AuthBlocSingleton.bloc.state.user!.userId!,
-                        ),
-                      ),
-                    ],
-                    child: const ProfilePage(
-                      popAble: false,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        _appHomeRoute(),
         GoRoute(
           path: '${Routes.productDetail}/:productId',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['productId'] as String),
+              'id': int.parse(state.pathParameters['productId'] ?? '-1'),
             },
             child: BlocProvider(
               create: (context) => ProductDetailBloc(
                 productRepository: context.read<IProductRepository>(),
-                productId:
-                    int.parse(state.pathParameters['productId'] as String),
+                chatRepository: context.read<IChatRepository>(),
+                productId: int.parse(state.pathParameters['productId'] ?? '-1'),
               ),
               child: const ProductDetailPage(),
             ),
           ),
         ),
         GoRoute(
-          path: '${Routes.together}/:togetherId',
+          path: '${Routes.togetherDetail}/:togetherId',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['togetherId'] as String),
+              'id': int.parse(state.pathParameters['togetherId'] ?? '-1'),
             },
             child: BlocProvider(
               create: (context) => TogetherDetailBloc(
                 togetherRepository: context.read<ITogetherRepository>(),
                 togetherId:
-                    int.parse(state.pathParameters['togetherId'] as String),
+                    int.parse(state.pathParameters['togetherId'] ?? '-1'),
               ),
               child: const TogetherDetailPage(),
             ),
@@ -411,21 +284,21 @@ class _AppRouterState extends State<AppRouter> {
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['userId'] as String),
+              'id': int.parse(state.pathParameters['userId'] ?? '-1'),
             },
             child: MultiBlocProvider(
               providers: [
                 BlocProvider(
                   create: (context) => ProfileBloc(
                     userRepository: context.read<IUserRepository>(),
-                    userId: int.parse(state.pathParameters['userId'] as String),
+                    userId: int.parse(state.pathParameters['userId'] ?? '-1'),
                   ),
                 ),
                 BlocProvider(
                   create: (context) => ProfileTabBloc(
                     profileRepository: context.read<IProfileRepository>(),
                     reviewRepository: context.read<IReviewRepository>(),
-                    userId: int.parse(state.pathParameters['userId'] as String),
+                    userId: int.parse(state.pathParameters['userId'] ?? '-1'),
                   ),
                 ),
               ],
@@ -441,12 +314,12 @@ class _AppRouterState extends State<AppRouter> {
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['userId'] as String),
+              'id': int.parse(state.pathParameters['userId'] ?? '-1'),
             },
             child: BlocProvider(
               create: (context) => FollowBloc(
                 userRepository: context.read<IUserRepository>(),
-                userId: int.parse(state.pathParameters['userId'] as String),
+                userId: int.parse(state.pathParameters['userId'] ?? '-1'),
                 mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
               child: FollowPage(
@@ -565,25 +438,7 @@ class _AppRouterState extends State<AppRouter> {
             ),
           ),
         ),
-        GoRoute(
-          path: Routes.chatRoom,
-          pageBuilder: (context, state) => PageTransition.cupertino(
-            key: state.pageKey,
-            name: state.fullPath,
-            arguments: {
-              'id': (state.extra as GoRouterExtraModel<int>).data ?? -1
-            },
-            child: BlocProvider(
-              create: (context) => ChatRoomBloc(
-                chatRepository: context.read<IChatRepository>(),
-                productRepository: context.read<IProductRepository>(),
-                togetherRepository: context.read<ITogetherRepository>(),
-                chatRoomId: (state.extra as GoRouterExtraModel<int>).data ?? -1,
-              ),
-              child: const ChatRoomPage(),
-            ),
-          ),
-        ),
+
         GoRoute(
           path: Routes.settings,
           pageBuilder: (context, state) => PageTransition.cupertino(
@@ -621,6 +476,7 @@ class _AppRouterState extends State<AppRouter> {
       debugShowCheckedModeBanner: false,
       title: F.title,
       theme: ThemeData(
+        platform: TargetPlatform.iOS,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white).copyWith(
           background: Colors.white,
         ),
@@ -655,21 +511,9 @@ class _AppRouterState extends State<AppRouter> {
         Locale('en'),
       ],
       locale: const Locale('ko'),
-      builder: (context, child) => BlocListener<FCMCubit, FCMState>(
-        bloc: FCMCubitSingleton.cubit,
-        listener: (context, state) {
-          if (state.data != null) {
-            // TODO: Replace event
-            AppSnackbar.show(
-              context,
-              message: state.body ?? Strings.unknownFail,
-            );
-          }
-        },
-        child: _flavorBanner(
-          child: child ?? const SizedBox(),
-          show: F.appFlavor != Flavor.prod,
-        ),
+      builder: (context, child) => _flavorBanner(
+        child: child ?? const SizedBox(),
+        show: F.appFlavor != Flavor.prod,
       ),
     );
   }

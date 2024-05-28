@@ -92,7 +92,7 @@ class _PhoneVerifyPageState extends State<PhoneVerifyPage> {
                 width: double.infinity,
                 height: Sizes.size32,
                 margin: EdgeInsets.only(
-                  bottom: MediaQuery.paddingOf(context).bottom,
+                  bottom: MediaQuery.viewPaddingOf(context).bottom,
                 ),
                 child: Center(
                   child: state.status == ELoadingStatus.loading

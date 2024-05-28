@@ -11,13 +11,17 @@ class AppBottomSheet extends BottomSheet {
   static show(
     BuildContext context, {
     required Widget child,
+    bool applyBottomPadding = false,
   }) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         margin: EdgeInsets.only(
-          bottom: MediaQuery.paddingOf(context).bottom + Sizes.size20,
+          bottom: Sizes.size20 +
+              (applyBottomPadding
+                  ? MediaQuery.viewPaddingOf(context).bottom
+                  : 0),
           left: Sizes.size20,
           right: Sizes.size20,
         ),
@@ -59,7 +63,7 @@ class AppBottomSheet extends BottomSheet {
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
-            bottom: MediaQuery.paddingOf(context).bottom + Sizes.size20,
+            bottom: MediaQuery.viewPaddingOf(context).bottom + Sizes.size20,
             left: Sizes.size20,
             right: Sizes.size20,
           ),

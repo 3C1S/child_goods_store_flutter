@@ -6,21 +6,21 @@ import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
-import 'package:child_goods_store_flutter/pages/home/widgets/home_app_bar_filters.dart';
+import 'package:child_goods_store_flutter/pages/product/widgets/product_app_bar_filters.dart';
 import 'package:child_goods_store_flutter/widgets/app_dropdown.dart';
 import 'package:child_goods_store_flutter/widgets/app_h_spliter.dart';
 import 'package:child_goods_store_flutter/widgets/common/v_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeAppBar extends StatefulWidget {
-  const HomeAppBar({super.key});
+class ProductAppBar extends StatefulWidget {
+  const ProductAppBar({super.key});
 
   @override
-  State<HomeAppBar> createState() => _HomeAppBarState();
+  State<ProductAppBar> createState() => _ProductAppBarState();
 }
 
-class _HomeAppBarState extends State<HomeAppBar> {
+class _ProductAppBarState extends State<ProductAppBar> {
   static const String _allCategory = '전체';
 
   void _onChangeMainCategory(String? mainCat) {
@@ -111,7 +111,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
             ),
           ),
-          const HomeAppBarFilters(),
+          const ProductAppBarFilters(),
           Gaps.v5,
           const AppHSpliter(),
         ],

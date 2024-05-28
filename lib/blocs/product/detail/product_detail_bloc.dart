@@ -1,9 +1,11 @@
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_event.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_state.dart';
+import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
+import 'package:child_goods_store_flutter/repositories/interface/chat_repository_interface.dart';
 import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,15 +13,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     with DioExceptionHandlerMixin {
   final IProductRepository productRepository;
+  final IChatRepository chatRepository;
   final int productId;
 
   ProductDetailBloc({
     required this.productRepository,
+    required this.chatRepository,
     required this.productId,
   }) : super(const ProductDetailState.init()) {
     on<ProductDetailGet>(_productDetailGetHandler);
     on<ProductDetailChangeSaleState>(_productDetailChangeSaleStateHandler);
     on<ProductDetailChangeHeart>(_productDetailChangeHeartHandler);
+    on<ProductDetailChat>(_productDetailChatHandler);
 
     add(ProductDetailGet());
   }
@@ -158,6 +163,41 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
             heartStatus: ELoadingStatus.init,
           ));
         }
+      },
+    );
+  }
+
+  Future<void> _productDetailChatHandler(
+    ProductDetailChat event,
+    Emitter<ProductDetailState> emit,
+  ) async {
+    if (state.status == ELoadingStatus.loading &&
+        state.chatStatus == ELoadingStatus.loading) return;
+
+    emit(state.copyWith(
+      status: ELoadingStatus.loading,
+      chatStatus: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        var res = await chatRepository.postChattingRoom(
+          category: EChatItemType.product,
+          id: productId,
+        );
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          chatStatus: ELoadingStatus.loaded,
+          chatRoomIdResult: res.data,
+        ));
+      },
+      state: state,
+      emit: emit,
+      finallyCall: () async {
+        emit(state.copyWith(
+          status: ELoadingStatus.init,
+          chatStatus: ELoadingStatus.init,
+        ));
       },
     );
   }

@@ -61,6 +61,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     context.read<ChatRoomBloc>().add(ChatRoomGetItem());
   }
 
+  void _onTapRetryChatConnect() {
+    context.read<ChatRoomBloc>().add(ChatRoomInitStomp());
+  }
+
   void _unfocus() {
     FocusScope.of(context).unfocus();
     FocusManager.instance.primaryFocus?.unfocus();
@@ -99,6 +103,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             },
           ),
         ),
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: CustomScrollView(
             controller: _scrollController,
@@ -169,19 +174,47 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             ],
           ),
         ),
-        bottomSheet: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.paddingOf(context).bottom,
-          ),
+        bottomSheet: SafeArea(
           child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
             buildWhen: (previous, current) =>
-                previous.targetStatus != current.targetStatus,
+                previous.targetStatus != current.targetStatus ||
+                previous.stompStatus != current.stompStatus,
             builder: (context, state) {
               if (state.targetStatus != ELoadingStatus.loaded) {
                 return const SizedBox();
               }
-              return const ChatSendBox();
+              if (state.stompStatus == ELoadingStatus.loaded) {
+                return const ChatSendBox();
+              }
+              if (state.stompStatus == ELoadingStatus.error) {
+                return Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: Sizes.size1 / 2,
+                        spreadRadius: Sizes.size1 / 2,
+                        offset: const Offset(0, -Sizes.size2),
+                        color: Colors.black.withOpacity(0.2),
+                      ),
+                    ],
+                  ),
+                  child: AppInkButton(
+                    onTap: _onTapRetryChatConnect,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    color: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    child: const AppFont(
+                      '채팅서버 연결에 실패했습니다.\n터치하여 재 연결을 시도해주세요.',
+                      textAlign: TextAlign.center,
+                      fontSize: Sizes.size12,
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox();
             },
           ),
         ),

@@ -86,7 +86,7 @@ class ProductRepositoryImplDev implements IProductRepository {
       data: ProductModel(
         productId: productId,
         user: UserProfileModel(
-          userId: 1, // 분기
+          userId: productId, // 분기
           nickName: 'product $productId saler',
           averageStars: 4.5,
         ),

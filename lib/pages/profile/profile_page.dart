@@ -98,6 +98,7 @@ class _ProfilePageState extends State<ProfilePage>
               )
             : null,
         body: SafeArea(
+          bottom: widget.popAble ? true : false,
           child: BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, state) {
               if (state.profileStatus == ELoadingStatus.loaded) {

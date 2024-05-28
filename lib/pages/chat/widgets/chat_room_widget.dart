@@ -4,7 +4,6 @@ import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
-import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/utils/time_utils.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
@@ -20,10 +19,7 @@ class ChatRoomWidget extends StatelessWidget {
   });
 
   void _onTapChatRoom(BuildContext context) {
-    context.push(
-      Routes.chatRoom,
-      extra: GoRouterExtraModel<int>(data: chatRoom.id),
-    );
+    context.go('${Routes.chat}/${SubRoutes.chatRoom}/${chatRoom.id}');
   }
 
   @override

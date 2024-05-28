@@ -39,24 +39,33 @@ class Routes {
   /// ReviewModel: previous review data
   static const String editReview = '/edit_review';
 
-  /// ### Extra - Required
-  /// extra: GoRouterExtraModel\<int\> \
-  /// int: [chatRoomId]
-  static const String chatRoom = '/chat_room';
-
-  static const String home = '/home';
+  static const String product = '/product';
   static const String together = '/together';
   static const String child = '/child';
   static const String chat = '/chat';
   static const String profile = '/profile';
 
+  /// ### Path parameter - Required
+  /// `/:productId` [int]
   static const String productDetail = '/product';
+
+  /// ### Path parameter - Required
+  /// `/:togetherId` [int]
   static const String togetherDetail = '/together';
 
+  /// ### Path parameter - Required
+  /// `/:userId` [int]
+  ///
+  /// ### Query parameter - Required
+  /// `?mode=EFollowMode.key`
   static const String follow = '/follow';
 }
 
 class SubRoutes {
   static const String ship = 'ship';
   static const String notification = 'notification';
+
+  /// ### Path parameter - Required
+  /// `/:chatRoomId` [int]
+  static const String chatRoom = 'chat_room';
 }

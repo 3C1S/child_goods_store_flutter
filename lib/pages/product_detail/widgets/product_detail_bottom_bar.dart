@@ -35,6 +35,7 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
   }) {
     AppBottomSheet.show(
       context,
+      applyBottomPadding: true,
       child: Material(
         child: Column(
           children: [
@@ -113,7 +114,19 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
     }
   }
 
-  void _onTapChat() {}
+  void _onTapChat() {
+    var bloc = context.read<ProductDetailBloc>();
+    if (bloc.state.chatRoomIdResult == null) {
+      bloc.add(ProductDetailChat());
+    } else {
+      _goChatRoom();
+    }
+  }
+
+  void _goChatRoom() {
+    var chatRoomId = context.read<ProductDetailBloc>().state.chatRoomIdResult;
+    context.go('${Routes.chat}/${SubRoutes.chatRoom}/$chatRoomId');
+  }
 
   bool _iamSaler(ProductDetailState state) {
     return AuthBlocSingleton.bloc.state.user?.userId ==
@@ -128,15 +141,22 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
         productId:
             context.read<ProductDetailBloc>().state.productModel!.productId!,
       ),
-      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
+        listener: (context, state) {
+          if (state.chatStatus == ELoadingStatus.loaded) {
+            _goChatRoom();
+          }
+        },
         builder: (context, state) {
           if (state.productStatus != ELoadingStatus.loaded) {
-            return const SizedBox();
+            return SizedBox(
+              height: MediaQuery.viewPaddingOf(context).bottom,
+            );
           }
           return Container(
-            height: Sizes.size60 + MediaQuery.paddingOf(context).bottom,
+            height: Sizes.size60 + MediaQuery.viewPaddingOf(context).bottom,
             padding: EdgeInsets.only(
-              bottom: MediaQuery.paddingOf(context).bottom,
+              bottom: MediaQuery.viewPaddingOf(context).bottom,
               left: Sizes.size20,
               right: Sizes.size20,
             ),

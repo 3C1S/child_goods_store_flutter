@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:child_goods_store_flutter/blocs/chat/room/chat_room_event.dart';
 import 'package:child_goods_store_flutter/blocs/chat/room/chat_room_state.dart';
+import 'package:child_goods_store_flutter/configs/configs.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
@@ -9,6 +12,17 @@ import 'package:child_goods_store_flutter/repositories/interface/chat_repository
 import 'package:child_goods_store_flutter/repositories/interface/product_repository_interfave.dart';
 import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:stomp_dart_client/stomp_dart_client.dart';
+
+// Private event
+class _StompError extends ChatRoomEvent {
+  final String? message;
+
+  _StompError(this.message);
+}
+
+class _StompLoaded extends ChatRoomEvent {}
 
 class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
     with DioExceptionHandlerMixin {
@@ -19,18 +33,28 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
   int? id;
   EChatItemType? type;
 
+  // Chatting STOPM socket
+  late final FlutterSecureStorage _storage;
+  late StompClient _stompClient;
+
   ChatRoomBloc({
     required this.chatRepository,
     required this.productRepository,
     required this.togetherRepository,
     required this.chatRoomId,
   }) : super(const ChatRoomState.init()) {
+    _storage = const FlutterSecureStorage();
+
     on<ChatRoomGetItem>(_chatRoomGetItemHandler);
     on<ChatRoomGetChats>(_chatRoomGetChatsHandler);
     on<ChatRoomSendChat>(_chatRoomSendChatHandler);
+    on<ChatRoomInitStomp>(_chatRoomInitStompHandler);
+    on<_StompError>(__stompErrorHandler);
+    on<_StompLoaded>(__stompLoadedHandler);
 
     add(ChatRoomGetItem());
     add(ChatRoomGetChats());
+    add(ChatRoomInitStomp());
   }
 
   Future<void> _chatRoomGetItemHandler(
@@ -159,6 +183,84 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState>
     Emitter<ChatRoomState> emit,
   ) async {
     if (event.message == Strings.nullStr) return;
-    print('[Chat send] ${event.message}');
+    if (!_stompClient.isActive) return;
+
+    _stompClient.send(
+      destination: '/pub/chat.talk.$chatRoomId',
+      body: json.encode(
+        {
+          'chatRoomId': chatRoomId,
+          "message": event.message,
+        },
+      ),
+    );
+  }
+
+  Future<void> _chatRoomInitStompHandler(
+    ChatRoomInitStomp event,
+    Emitter<ChatRoomState> emit,
+  ) async {
+    if (state.stompStatus == ELoadingStatus.loading) return;
+    emit(state.copyWith(stompStatus: ELoadingStatus.loading));
+
+    // jwt token 불러오기
+    final jwt = (await _storage.readAll())[Strings.jwtToken];
+
+    _stompClient = StompClient(
+      config: StompConfig(
+        url: Configs.instance.wsUrl,
+        stompConnectHeaders: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader: 'Bearer $jwt',
+        },
+        webSocketConnectHeaders: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader: 'Bearer $jwt',
+        },
+        beforeConnect: () async {
+          print('connect to stomp...');
+        },
+        onWebSocketError: (e) async {
+          print('ws error: $e');
+          _stompClient.deactivate();
+          add(_StompError('ws error: $e'));
+        },
+        onStompError: (e) async {
+          print('stomp error: $e');
+          _stompClient.deactivate();
+          add(_StompError('stomp error: ${e.toString()}'));
+        },
+        onConnect: (stompFrame) async {
+          _stompClient.subscribe(
+            destination: '/exchange/chat.exchange/room.$chatRoomId',
+            callback: (frame) {
+              List<dynamic>? result = json.decode(frame.body!);
+              print(result);
+            },
+          );
+          add(_StompLoaded());
+        },
+      ),
+    );
+    _stompClient.activate();
+  }
+
+  Future<void> __stompErrorHandler(
+    _StompError event,
+    Emitter<ChatRoomState> emit,
+  ) async {
+    emit(state.copyWith(
+      stompStatus: ELoadingStatus.error,
+      stompErrMessage: event.message,
+    ));
+  }
+
+  Future<void> __stompLoadedHandler(
+    _StompLoaded event,
+    Emitter<ChatRoomState> emit,
+  ) async {
+    emit(state.copyWith(
+      stompStatus: ELoadingStatus.loaded,
+    ));
   }
 }

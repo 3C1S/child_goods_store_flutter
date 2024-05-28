@@ -67,9 +67,9 @@ class _TogetherDetailBottomBarState extends State<TogetherDetailBottomBar> {
           return const SizedBox();
         }
         return Container(
-          height: Sizes.size60 + MediaQuery.paddingOf(context).bottom,
+          height: Sizes.size60 + MediaQuery.viewPaddingOf(context).bottom,
           padding: EdgeInsets.only(
-            bottom: MediaQuery.paddingOf(context).bottom,
+            bottom: MediaQuery.viewPaddingOf(context).bottom,
             left: Sizes.size20,
             right: Sizes.size20,
           ),

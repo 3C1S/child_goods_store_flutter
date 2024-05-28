@@ -26,23 +26,21 @@ class ChatPage extends StatelessWidget {
         title: const AppFont('채팅'),
         elevation: Sizes.size1,
       ),
-      body: SafeArea(
-        child: BlocBuilder<ChatListBloc, ChatListState>(
-          builder: (context, state) {
-            if (state.status == ELoadingStatus.loaded) {
-              return _buildBody(context, state: state);
-            }
-            if (state.status == ELoadingStatus.error) {
-              return _buildError(
-                context,
-                message: state.message ?? Strings.unknownFail,
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
+      body: BlocBuilder<ChatListBloc, ChatListState>(
+        builder: (context, state) {
+          if (state.status == ELoadingStatus.loaded) {
+            return _buildBody(context, state: state);
+          }
+          if (state.status == ELoadingStatus.error) {
+            return _buildError(
+              context,
+              message: state.message ?? Strings.unknownFail,
             );
-          },
-        ),
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
@@ -52,6 +50,7 @@ class ChatPage extends StatelessWidget {
     required ChatListState state,
   }) {
     return ListView.separated(
+      padding: EdgeInsets.zero,
       itemBuilder: (context, index) => ChatRoomWidget(
         chatRoom: state.chatRooms[index],
       ),
