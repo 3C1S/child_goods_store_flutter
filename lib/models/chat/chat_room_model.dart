@@ -15,6 +15,7 @@ class ChatRoomModel with _$ChatRoomModel {
     EChatItemType? category,
     int? id,
     String? productName,
+    String? productImage,
     int? participantsNum,
     int? price,
     int? unitPrice,
