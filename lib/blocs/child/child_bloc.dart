@@ -1,3 +1,4 @@
+import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_event.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
@@ -126,6 +127,7 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
       () async {
         var res = await childRepository.getChildProductList(
           childId: state.selectedChild!.childId!,
+          userId: AuthBlocSingleton.bloc.state.user!.userId!,
           page: state.page,
         );
 

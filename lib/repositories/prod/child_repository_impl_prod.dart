@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
+import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
@@ -71,12 +72,13 @@ class ChildRepositoryImplProd implements IChildRepository {
   @override
   Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
     required int childId,
+    required int userId,
     required int page,
   }) async {
     // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
+    // dio.interceptors.add(UnAuthInterceptor());
     // dio.get(
-    //   '/child/$childId',
+    //   '/child/$childId/user/$userId',
     //   queryParameters: {
     //     'page': page,
     //   },

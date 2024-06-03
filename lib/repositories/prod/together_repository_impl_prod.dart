@@ -3,11 +3,13 @@ import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
+import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/together_repository_interface.dart';
+import 'package:dio/dio.dart';
 
 class TogetherRepositoryImplProd implements ITogetherRepository {
   ///
@@ -137,7 +139,12 @@ class TogetherRepositoryImplProd implements ITogetherRepository {
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
-    // dio.post('/together/heart/$togetherId');
+    // dio.post(
+    //   '/together/heart',
+    //   data: {
+    //     'togetherId': togetherId,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));

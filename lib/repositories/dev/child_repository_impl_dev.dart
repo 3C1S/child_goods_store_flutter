@@ -113,6 +113,7 @@ class ChildRepositoryImplDev implements IChildRepository {
   @override
   Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
     required int childId,
+    required int userId,
     required int page,
   }) async {
     await Future.delayed(const Duration(seconds: 1));
