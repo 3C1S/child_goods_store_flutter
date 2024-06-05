@@ -154,6 +154,24 @@ class UserRepositoryImplProd implements IUserRepository {
   }
 
   ///
+  /// API 23
+  @override
+  Future<ResModel<void>> deleteUser() async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.delete('/user');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
+
+    return res;
+  }
+
+  ///
   /// API 25
   @override
   Future<ResModel<void>> postUserFollow({

@@ -3,6 +3,7 @@ import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_model.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
+import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 
 class UserRepositoryImplDev implements IUserRepository {
   ///
@@ -224,6 +225,19 @@ class UserRepositoryImplDev implements IUserRepository {
           .map((user) => UserModel.fromJson(user))
           .toList(),
     );
+
+    return res;
+  }
+
+  ///
+  /// API 23
+  @override
+  Future<ResModel<void>> deleteUser() async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
 
     return res;
   }

@@ -1,11 +1,16 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_event.dart';
+import 'package:child_goods_store_flutter/blocs/delete_account/delete_account_bloc.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
+import 'package:child_goods_store_flutter/pages/settings/widgets/delete_account_dialog.dart';
+import 'package:child_goods_store_flutter/repositories/interface/user_repository_interface.dart';
+import 'package:child_goods_store_flutter/widgets/app_bottom_sheet.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -27,7 +32,18 @@ class SettingsPage extends StatelessWidget {
     AuthBlocSingleton.bloc.add(AuthSignout());
   }
 
-  void _onTapRemoveAccount(BuildContext context) {}
+  void _onTapRemoveAccount(BuildContext context) {
+    AppBottomSheet.show(
+      context,
+      applyBottomPadding: true,
+      child: BlocProvider(
+        create: (context) => DeleteAccountBloc(
+          userRepository: context.read<IUserRepository>(),
+        ),
+        child: const DeleteAccountDialog(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
