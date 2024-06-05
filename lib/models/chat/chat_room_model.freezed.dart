@@ -25,6 +25,7 @@ mixin _$ChatRoomModel {
   EChatItemType? get category => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   String? get productName => throw _privateConstructorUsedError;
+  String? get productImage => throw _privateConstructorUsedError;
   int? get participantsNum => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   int? get unitPrice => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $ChatRoomModelCopyWith<$Res> {
       EChatItemType? category,
       int? id,
       String? productName,
+      String? productImage,
       int? participantsNum,
       int? price,
       int? unitPrice,
@@ -75,6 +77,7 @@ class _$ChatRoomModelCopyWithImpl<$Res, $Val extends ChatRoomModel>
     Object? category = freezed,
     Object? id = freezed,
     Object? productName = freezed,
+    Object? productImage = freezed,
     Object? participantsNum = freezed,
     Object? price = freezed,
     Object? unitPrice = freezed,
@@ -98,6 +101,10 @@ class _$ChatRoomModelCopyWithImpl<$Res, $Val extends ChatRoomModel>
       productName: freezed == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productImage: freezed == productImage
+          ? _value.productImage
+          : productImage // ignore: cast_nullable_to_non_nullable
               as String?,
       participantsNum: freezed == participantsNum
           ? _value.participantsNum
@@ -141,6 +148,7 @@ abstract class _$$ChatRoomModelImplCopyWith<$Res>
       EChatItemType? category,
       int? id,
       String? productName,
+      String? productImage,
       int? participantsNum,
       int? price,
       int? unitPrice,
@@ -164,6 +172,7 @@ class __$$ChatRoomModelImplCopyWithImpl<$Res>
     Object? category = freezed,
     Object? id = freezed,
     Object? productName = freezed,
+    Object? productImage = freezed,
     Object? participantsNum = freezed,
     Object? price = freezed,
     Object? unitPrice = freezed,
@@ -187,6 +196,10 @@ class __$$ChatRoomModelImplCopyWithImpl<$Res>
       productName: freezed == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productImage: freezed == productImage
+          ? _value.productImage
+          : productImage // ignore: cast_nullable_to_non_nullable
               as String?,
       participantsNum: freezed == participantsNum
           ? _value.participantsNum
@@ -225,6 +238,7 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
       this.category,
       this.id,
       this.productName,
+      this.productImage,
       this.participantsNum,
       this.price,
       this.unitPrice,
@@ -245,6 +259,8 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
   @override
   final String? productName;
   @override
+  final String? productImage;
+  @override
   final int? participantsNum;
   @override
   final int? price;
@@ -259,7 +275,7 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
 
   @override
   String toString() {
-    return 'ChatRoomModel(chatRoomId: $chatRoomId, category: $category, id: $id, productName: $productName, participantsNum: $participantsNum, price: $price, unitPrice: $unitPrice, endDate: $endDate, message: $message, createdAt: $createdAt)';
+    return 'ChatRoomModel(chatRoomId: $chatRoomId, category: $category, id: $id, productName: $productName, productImage: $productImage, participantsNum: $participantsNum, price: $price, unitPrice: $unitPrice, endDate: $endDate, message: $message, createdAt: $createdAt)';
   }
 
   @override
@@ -274,6 +290,8 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.productName, productName) ||
                 other.productName == productName) &&
+            (identical(other.productImage, productImage) ||
+                other.productImage == productImage) &&
             (identical(other.participantsNum, participantsNum) ||
                 other.participantsNum == participantsNum) &&
             (identical(other.price, price) || other.price == price) &&
@@ -293,6 +311,7 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
       category,
       id,
       productName,
+      productImage,
       participantsNum,
       price,
       unitPrice,
@@ -321,6 +340,7 @@ abstract class _ChatRoomModel implements ChatRoomModel {
       final EChatItemType? category,
       final int? id,
       final String? productName,
+      final String? productImage,
       final int? participantsNum,
       final int? price,
       final int? unitPrice,
@@ -340,6 +360,8 @@ abstract class _ChatRoomModel implements ChatRoomModel {
   int? get id;
   @override
   String? get productName;
+  @override
+  String? get productImage;
   @override
   int? get participantsNum;
   @override

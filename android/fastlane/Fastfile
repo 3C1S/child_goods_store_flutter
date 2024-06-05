@@ -1,0 +1,20 @@
+default_platform(:android)
+
+platform :android do
+  desc "Submit a new Beta"
+  lane :beta do
+    # Build phase
+    sh("flutter build appbundle --flavor prod")
+
+    # Upload phase
+    upload_to_play_store(
+      skip_upload_metadata: true,
+      skip_upload_screenshots: true,
+      skip_upload_images: true,
+      skip_upload_apk: true,
+      track: 'internal',
+      release_status: 'draft',
+      aab: '../build/app/outputs/bundle/prodRelease/app-prod-release.aab'
+    )
+  end
+end

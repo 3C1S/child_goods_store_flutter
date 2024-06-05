@@ -7,7 +7,9 @@ import 'package:child_goods_store_flutter/models/chat/chat_room_model.dart';
 import 'package:child_goods_store_flutter/utils/time_utils.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
+import 'package:child_goods_store_flutter/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 class ChatRoomWidget extends StatelessWidget {
@@ -34,10 +36,14 @@ class ChatRoomWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: Sizes.size60,
-              height: Sizes.size60,
-              color: Colors.grey.shade400,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(Sizes.size8),
+              child: AppNetworkImage(
+                profileImg: chatRoom.productImage,
+                width: Sizes.size60,
+                height: Sizes.size60,
+                hideText: true,
+              ),
             ),
             Gaps.h10,
             Expanded(

@@ -1,0 +1,65 @@
+# frozen_string_literal: true
+
+default_platform(:ios)
+
+platform :ios do
+  def updateVersion(options)
+    if options[:version]
+      version = options[:version]
+    else
+      version = prompt(text: "Enter the version type or specific version\n(major, minor, patch or 1.0.0): ")
+    end
+
+    re = /\d+.\d+.\d+/
+    versionNum = version[re, 0]
+
+    if versionNum
+      increment_version_number(
+        version_number: versionNum
+      )
+    elsif version == 'major' || version == 'minor' || version == 'patch'
+      increment_version_number(
+        bump_type: version
+      )
+    else
+      UI.user_error!('[ERROR] Wrong version!!!!!!')
+    end
+  end
+
+  def certificate(options)
+    install_provisioning_profile(path: 'u3C1S_distribution.mobileprovision')
+    update_project_provisioning(
+      xcodeproj: 'Runner.xcodeproj',
+      target_filter: 'github',
+      profile: 'u3C1S_distribution.mobileprovision',
+      build_configuration: 'Release'
+    )
+    api_key = app_store_connect_api_key(
+      key_id: 'C7L3LBM367',
+      issuer_id: 'f4a2a4e4-7151-4c57-9c4b-9333f9cc3bb7',
+      key_filepath: 'u3C1S_distribution.p8'
+    )
+    api_key
+  end
+
+  desc 'Update version'
+  lane :version do |options|
+    updateVersion(options)
+    increment_build_number(xcodeproj: 'Runner.xcodeproj')
+  end
+
+  desc 'Push a new beta build to TestFlight'
+  lane :beta do |options|
+    # Create api_key phase
+    api_key = certificate(options)
+
+    # Build phase
+    sh("flutter build ipa --flavor prod")
+
+    # Upload phase
+    upload_to_testflight(
+      api_key: api_key,
+      ipa: '../build/ios/ipa/키디마켓.ipa'
+    )
+  end
+end

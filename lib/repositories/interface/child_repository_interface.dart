@@ -22,6 +22,7 @@ abstract interface class IChildRepository {
   /// API 102
   Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
     required int childId,
+    required int userId,
     required int page,
   });
 }

@@ -32,6 +32,8 @@ class ChatRepositoryImplDev implements IChatRepository {
             category: EChatItemType.together,
             id: 2 * i + 2,
             productName: 'Example together',
+            productImage:
+                'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
             participantsNum: 5,
             price: 100000,
             unitPrice: 2000,

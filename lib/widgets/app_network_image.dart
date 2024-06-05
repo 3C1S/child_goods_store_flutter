@@ -8,12 +8,14 @@ class AppNetworkImage extends StatelessWidget {
   final String? profileImg;
   final double? width;
   final double? height;
+  final bool hideText;
 
   const AppNetworkImage({
     super.key,
     this.profileImg,
     this.width,
     this.height,
+    this.hideText = false,
   });
 
   @override
@@ -35,13 +37,14 @@ class AppNetworkImage extends StatelessWidget {
                       size: Sizes.size40,
                       color: Colors.black87.withOpacity(0.5),
                     ),
-                    Gaps.v10,
-                    AppFont(
-                      '제공되는 이미지가\n없습니다 :(',
-                      textAlign: TextAlign.center,
-                      fontSize: Sizes.size10,
-                      color: Colors.black87.withOpacity(0.5),
-                    ),
+                    if (!hideText) Gaps.v10,
+                    if (!hideText)
+                      AppFont(
+                        '제공되는 이미지가\n없습니다 :(',
+                        textAlign: TextAlign.center,
+                        fontSize: Sizes.size10,
+                        color: Colors.black87.withOpacity(0.5),
+                      ),
                   ],
                 ),
               ),

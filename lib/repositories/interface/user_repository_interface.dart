@@ -44,6 +44,10 @@ abstract interface class IUserRepository {
   });
 
   ///
+  /// API 23
+  Future<ResModel<void>> deleteUser();
+
+  ///
   /// API 25
   Future<ResModel<void>> postUserFollow({
     required int followId,

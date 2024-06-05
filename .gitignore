@@ -45,6 +45,15 @@ app.*.map.json
 # VSCode settings
 .vscode/
 
+# Deploy secret - Android
+android/pc-api-*
+android/fastlane/*
+!android/fastlane/Fastfile
+# Deploy secret - iOS
+ios/u3C1S_distribution.*
+ios/fastlane/*
+!ios/fastlane/Fastfile
+
 # Secret - Common
 lib/constants/secret.dart
 lib/configs/firebase_options.dart

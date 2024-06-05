@@ -4,19 +4,19 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-# In Windows, build-name is used as the major, minor, and patch parts
-# of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+# Deplay Step
+# 1. Change version
+#
+# [Android] =======
+# 1. Change `android/key.properties` - `flutter.versionName`, `flutter.versionCode`
+# 2. cd android
+# 3. fastlane beta
+#
+# [iOS] =======
+# 1. cd ios
+# 2. fastlane version - set version to pubspec.yaml's version
+# 3. fastlane beta
+version: 0.0.2+2
 
 environment:
   sdk: ">=3.2.3 <4.0.0"
@@ -64,6 +64,7 @@ dependencies:
   web_socket_channel: ^2.4.5
   stomp_dart_client: ^2.0.0
   flutter_advanced_switch: ^3.1.0
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -92,6 +93,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/images/
     - assets/svgs/
     - assets/jsons/
 
@@ -126,28 +128,38 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "DEV 육아"
+        name: "DEV 키디마켓"
       android:
         applicationId: "dev.io.github.u3C1S.child_goods_store_flutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "android/firebase/dev/google-services.json"
       ios:
         bundleId: "dev.io.github.u3C1S.childGoodsStoreFlutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "ios/firebase/dev/GoogleService-Info.plist"
 
     prod:
       app:
-        name: "육아"
+        name: "키디마켓"
       android:
         applicationId: "io.github.u3C1S.child_goods_store_flutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "android/firebase/prod/google-services.json"
       ios:
         bundleId: "io.github.u3C1S.childGoodsStoreFlutter"
-        # icon: "assets/app_icon.png"
+        icon: "assets/images/child_goods_store_icon_1024_bg.png"
         firebase:
           config: "ios/firebase/prod/GoogleService-Info.plist"
+
+# Native splash settings
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/child_goods_store_icon_1024.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/images/child_goods_store_icon_1024.png
+  android: true # Generate splash screen for Android
+  ios: true # Generate splash screen for iOS
